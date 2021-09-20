@@ -673,10 +673,8 @@
             <configuration>
                <!-- The customized rules file -->
                <configLocation>${project.basedir}/src/config/checkstyle/checkstyle-rules.xml</configLocation>
-               <!-- Excludes generated code -->
-               <excludes>**/generated/**/*</excludes>
                <!-- Excludes metamodel -->
-               <exclude>**/*_.java</exclude>
+               <exclude>**/Q*Entity</exclude>
             </configuration>
          </plugin>
          <plugin>
@@ -689,10 +687,8 @@
                   <link>https://javadoc.io/doc/org.eclipse.persistence/javax.persistence/</link>
                </links>
                <sourceFileExcludes>
-                  <!-- Excludes generated code -->
-                  <exclude>**/generated/**/*</exclude>
                   <!-- Excludes metamodel -->
-                  <exclude>**/*_.java</exclude>
+                  <exclude>**/Q*Entity</exclude>
                </sourceFileExcludes>
             </configuration>
          </plugin>
@@ -708,10 +704,8 @@
                   <ruleset>${project.basedir}/src/config/pmd/pmd-rules.xml</ruleset>
                </rulesets>
                <excludes>
-                  <!-- Excludes generated code -->
-                  <exclude>**/generated/**/*</exclude>
                   <!-- Excludes metamodel -->
-                  <exclude>**/*_.java</exclude>
+                  <exclude>**/Q*Entity</exclude>
                </excludes>
             </configuration>
          </plugin>
