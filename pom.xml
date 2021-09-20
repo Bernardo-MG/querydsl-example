@@ -27,7 +27,7 @@
    <name>JPA Example</name>
    <description>An example showing how to use Querydsl</description>
    <url>https://github.com/bernardo-mg/querydsl-example</url>
-   <inceptionYear>2016</inceptionYear>
+   <inceptionYear>2021</inceptionYear>
 
    <licenses>
       <license>
