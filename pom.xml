@@ -443,6 +443,10 @@
                <groupId>org.apache.logging.log4j</groupId>
                <artifactId>log4j-api-java9</artifactId>
             </exclusion>
+            <exclusion>
+               <groupId>org.apache.logging.log4j</groupId>
+               <artifactId>log4j-core-java9</artifactId>
+            </exclusion>
          </exclusions>
       </dependency>
       <!-- ============================================== -->
@@ -562,6 +566,14 @@
                <groupId>org.junit.vintage</groupId>
                <artifactId>junit-vintage-engine</artifactId>
             </exclusion>
+            <exclusion>
+               <groupId>org.apache.logging.log4j</groupId>
+               <artifactId>log4j-api-java9</artifactId>
+            </exclusion>
+            <exclusion>
+               <groupId>org.apache.logging.log4j</groupId>
+               <artifactId>log4j-core-java9</artifactId>
+            </exclusion>
          </exclusions>
       </dependency>
       <!-- ********************************************** -->
@@ -572,6 +584,16 @@
          <groupId>org.slf4j</groupId>
          <artifactId>slf4j-api</artifactId>
          <version>${slf4j.version}</version>
+         <exclusions>
+            <exclusion>
+               <groupId>org.apache.logging.log4j</groupId>
+               <artifactId>log4j-api-java9</artifactId>
+            </exclusion>
+            <exclusion>
+               <groupId>org.apache.logging.log4j</groupId>
+               <artifactId>log4j-core-java9</artifactId>
+            </exclusion>
+         </exclusions>
          <scope>test</scope>
       </dependency>
       <dependency>
@@ -579,6 +601,16 @@
          <groupId>org.apache.logging.log4j</groupId>
          <artifactId>log4j-slf4j-impl</artifactId>
          <version>${log4j.version}</version>
+         <exclusions>
+            <exclusion>
+               <groupId>org.apache.logging.log4j</groupId>
+               <artifactId>log4j-api-java9</artifactId>
+            </exclusion>
+            <exclusion>
+               <groupId>org.apache.logging.log4j</groupId>
+               <artifactId>log4j-core-java9</artifactId>
+            </exclusion>
+         </exclusions>
          <scope>test</scope>
       </dependency>
       <dependency>
@@ -586,6 +618,16 @@
          <groupId>org.apache.logging.log4j</groupId>
          <artifactId>log4j-core</artifactId>
          <version>${log4j.version}</version>
+         <exclusions>
+            <exclusion>
+               <groupId>org.apache.logging.log4j</groupId>
+               <artifactId>log4j-api-java9</artifactId>
+            </exclusion>
+            <exclusion>
+               <groupId>org.apache.logging.log4j</groupId>
+               <artifactId>log4j-core-java9</artifactId>
+            </exclusion>
+         </exclusions>
          <scope>test</scope>
       </dependency>
       <!-- ********************************************** -->
