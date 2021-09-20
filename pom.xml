@@ -359,7 +359,7 @@
       <!-- ============================================== -->
       <!-- =============== MANIFEST DATA ================ -->
       <!-- ============================================== -->
-      <manifest.name>com/bernardomg/example/jpa</manifest.name>
+      <manifest.name>com/bernardomg/example/querydsl</manifest.name>
       <!-- ============================================== -->
       <!-- =========== DEPENDENCIES VERSIONS ============ -->
       <!-- ============================================== -->
@@ -380,6 +380,8 @@
       <querydsl.version>5.0.0</querydsl.version>
       <slf4j.version>1.7.30</slf4j.version>
       <snakeyaml.version>1.29</snakeyaml.version>
+      <spring.boot.version>2.5.4</spring.boot.version>
+      <spring.data.train.version>2021.0.4</spring.data.train.version>
       <spring.version>5.3.10</spring.version>
       <!-- ============================================== -->
       <!-- ============== PLUGINS VERSIONS ============== -->
@@ -405,6 +407,14 @@
             <type>pom</type>
             <scope>import</scope>
          </dependency>
+         <dependency>
+            <!-- Spring Data BOM -->
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-bom</artifactId>
+            <version>${spring.data.train.version}</version>
+            <type>pom</type>
+            <scope>import</scope>
+         </dependency>
       </dependencies>
    </dependencyManagement>
 
@@ -425,6 +435,15 @@
          <version>${javaee.api.version}</version>
       </dependency>
       <!-- ============================================== -->
+      <!-- ================== SPRING ==================== -->
+      <!-- ============================================== -->
+      <dependency>
+         <!-- Spring Data JPA -->
+         <groupId>org.springframework.data</groupId>
+         <artifactId>spring-data-jpa</artifactId>
+         <scope>provided</scope>
+      </dependency>
+      <!-- ============================================== -->
       <!-- ==================== JAVAX =================== -->
       <!-- ============================================== -->
       <dependency>
@@ -432,6 +451,7 @@
          <groupId>javax.annotation</groupId>
          <artifactId>javax.annotation-api</artifactId>
          <version>${javax.annotation.version}</version>
+         <scope>provided</scope>
       </dependency>
       <!-- ============================================== -->
       <!-- ================== QUERYDSL ================== -->
@@ -441,6 +461,7 @@
          <groupId>com.querydsl</groupId>
          <artifactId>querydsl-jpa</artifactId>
          <version>${querydsl.version}</version>
+         <scope>provided</scope>
       </dependency>
       <!-- ============================================== -->
       <!-- ======= TEST ENVIRONMENT DEPENDENCIES ======== -->
@@ -521,6 +542,19 @@
          <groupId>org.springframework</groupId>
          <artifactId>spring-tx</artifactId>
          <scope>test</scope>
+      </dependency>
+      <dependency>
+         <!-- Spring Boot Starter: Test -->
+         <groupId>org.springframework.boot</groupId>
+         <artifactId>spring-boot-starter-test</artifactId>
+         <version>${spring.boot.version}</version>
+         <scope>test</scope>
+         <exclusions>
+            <exclusion>
+               <groupId>org.junit.vintage</groupId>
+               <artifactId>junit-vintage-engine</artifactId>
+            </exclusion>
+         </exclusions>
       </dependency>
       <!-- ********************************************** -->
       <!-- ****************** LOGGERS ******************* -->
