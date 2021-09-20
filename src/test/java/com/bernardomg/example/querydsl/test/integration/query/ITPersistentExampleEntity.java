@@ -69,7 +69,7 @@ public class ITPersistentExampleEntity {
 
         entities = query.from(sample).fetch();
 
-        Assertions.assertEquals(10, entities.size());
+        Assertions.assertEquals(30, entities.size());
     }
 
 }
