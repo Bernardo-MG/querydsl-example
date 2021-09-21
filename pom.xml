@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
    <modelVersion>4.0.0</modelVersion>
@@ -21,13 +20,13 @@
 
    <groupId>com.bernardomg.example</groupId>
    <artifactId>querydsl-example</artifactId>
-   <version>1.0.0-SNAPSHOT</version>
+   <version>1.0.0</version>
    <packaging>jar</packaging>
 
    <name>JPA Example</name>
    <description>An example showing how to use Querydsl</description>
    <url>https://github.com/bernardo-mg/querydsl-example</url>
-   <inceptionYear>2016</inceptionYear>
+   <inceptionYear>2021</inceptionYear>
 
    <licenses>
       <license>
@@ -180,6 +179,7 @@
                <groupId>com.h2database</groupId>
                <artifactId>h2</artifactId>
                <version>${h2.version}</version>
+               <scope>test</scope>
             </dependency>
          </dependencies>
       </profile>
@@ -223,6 +223,7 @@
                <groupId>mysql</groupId>
                <artifactId>mysql-connector-java</artifactId>
                <version>${mysql.version}</version>
+               <scope>test</scope>
             </dependency>
          </dependencies>
       </profile>
@@ -244,6 +245,7 @@
                <groupId>org.postgresql</groupId>
                <artifactId>postgresql</artifactId>
                <version>${postgresql.version}</version>
+               <scope>test</scope>
             </dependency>
          </dependencies>
       </profile>
@@ -359,7 +361,7 @@
       <!-- ============================================== -->
       <!-- =============== MANIFEST DATA ================ -->
       <!-- ============================================== -->
-      <manifest.name>com/bernardomg/example/jpa</manifest.name>
+      <manifest.name>com/bernardomg/example/querydsl</manifest.name>
       <!-- ============================================== -->
       <!-- =========== DEPENDENCIES VERSIONS ============ -->
       <!-- ============================================== -->
@@ -378,7 +380,7 @@
       <mysql.version>8.0.21</mysql.version>
       <postgresql.version>42.2.23</postgresql.version>
       <querydsl.version>5.0.0</querydsl.version>
-      <slf4j.version>1.7.30</slf4j.version>
+      <slf4j.version>1.7.32</slf4j.version>
       <snakeyaml.version>1.29</snakeyaml.version>
       <spring.version>5.3.10</spring.version>
       <!-- ============================================== -->
@@ -441,6 +443,13 @@
          <groupId>com.querydsl</groupId>
          <artifactId>querydsl-jpa</artifactId>
          <version>${querydsl.version}</version>
+      </dependency>
+      <dependency>
+         <!-- Querydsl APT -->
+         <groupId>com.querydsl</groupId>
+         <artifactId>querydsl-apt</artifactId>
+         <version>${querydsl.version}</version>
+         <scope>provided</scope>
       </dependency>
       <!-- ============================================== -->
       <!-- ======= TEST ENVIRONMENT DEPENDENCIES ======== -->
@@ -564,6 +573,22 @@
 
    <build>
       <defaultGoal>clean package</defaultGoal>
+      <testResources>
+         <testResource>
+            <directory>src/test/resources/</directory>
+         </testResource>
+         <testResource>
+            <!-- Test resources -->
+            <directory>src/test/resources/</directory>
+            <includes>
+               <!-- Filter the contexts -->
+               <include>context/**/*.xml</include>
+               <!-- Filter the properties -->
+               <include>config/**/*.properties</include>
+            </includes>
+            <filtering>true</filtering>
+         </testResource>
+      </testResources>
       <plugins>
          <plugin>
             <!-- Changes -->
@@ -655,6 +680,22 @@
                </dependency>
             </dependencies>
          </plugin>
+         <plugin>
+            <!-- Resources -->
+            <!-- Handles the project resources. -->
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-resources-plugin</artifactId>
+            <configuration>
+               <!-- Variables to to override will be delimited with a @. -->
+               <!-- This avoids collisions with Spring variables. -->
+               <!-- So instead of replacing ${project.name} Maven will replace 
+                  @project.name@. -->
+               <useDefaultDelimiters>false</useDefaultDelimiters>
+               <delimiters>
+                  <delimiter>@</delimiter>
+               </delimiters>
+            </configuration>
+         </plugin>
       </plugins>
    </build>
 
@@ -673,10 +714,8 @@
             <configuration>
                <!-- The customized rules file -->
                <configLocation>${project.basedir}/src/config/checkstyle/checkstyle-rules.xml</configLocation>
-               <!-- Excludes generated code -->
-               <excludes>**/generated/**/*</excludes>
                <!-- Excludes metamodel -->
-               <exclude>**/*_.java</exclude>
+               <exclude>**/Q*Entity</exclude>
             </configuration>
          </plugin>
          <plugin>
@@ -689,10 +728,8 @@
                   <link>https://javadoc.io/doc/org.eclipse.persistence/javax.persistence/</link>
                </links>
                <sourceFileExcludes>
-                  <!-- Excludes generated code -->
-                  <exclude>**/generated/**/*</exclude>
                   <!-- Excludes metamodel -->
-                  <exclude>**/*_.java</exclude>
+                  <exclude>**/Q*Entity</exclude>
                </sourceFileExcludes>
             </configuration>
          </plugin>
@@ -708,16 +745,14 @@
                   <ruleset>${project.basedir}/src/config/pmd/pmd-rules.xml</ruleset>
                </rulesets>
                <excludes>
-                  <!-- Excludes generated code -->
-                  <exclude>**/generated/**/*</exclude>
                   <!-- Excludes metamodel -->
-                  <exclude>**/*_.java</exclude>
+                  <exclude>**/Q*Entity</exclude>
                </excludes>
             </configuration>
          </plugin>
          <plugin>
-            <!-- SpotBugs -->
-            <!-- Checks for patterns which are prone to errors -->
+             <!-- SpotBugs -->
+             <!-- Checks for patterns which are prone to errors -->
             <groupId>com.github.spotbugs</groupId>
             <artifactId>spotbugs-maven-plugin</artifactId>
             <configuration>

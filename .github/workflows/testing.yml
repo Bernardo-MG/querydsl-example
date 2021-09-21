@@ -10,7 +10,7 @@ jobs:
       matrix:
         jdk: [ 11, 16 ]
         db: [ h2, hsqldb, mysql, postgres ]
-        provider: [ hibernate, eclipselink ]
+        provider: [ hibernate ]
 
 
     services:
@@ -43,5 +43,10 @@ jobs:
       with:
         java-version: ${{ matrix.jdk }}
         distribution: 'adopt'
+    - name: Dependency cache
+      uses: actions/cache@v2.1.6
+      with:
+        path: ~/.m2/repository
+        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
     - name: Run all tests
       run: mvn clean verify -P ${{ matrix.db }},${{ matrix.provider }}
