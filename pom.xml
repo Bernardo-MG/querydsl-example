@@ -80,8 +80,10 @@
    <profiles>
       <profile>
          <!-- Profile for the Eclipse Maven plugin -->
-         <!-- Sets the POM so this plugin does not give the usual unregistered goals errors -->
-         <!-- It will be activated automatically on Eclipse if this has the m2e plugin, by detecting the version property -->
+         <!-- Sets the POM so this plugin does not give the usual unregistered 
+            goals errors -->
+         <!-- It will be activated automatically on Eclipse if this has the 
+            m2e plugin, by detecting the version property -->
          <id>eclipse-maven</id>
          <activation>
             <property>
@@ -93,8 +95,10 @@
                <plugins>
                   <plugin>
                      <!-- m2e lifecycle mapping -->
-                     <!-- This is used to configure the Maven plugin for Eclipse. -->
-                     <!-- Among other things, it allows registering goals, which Eclipse would otherwise reject. -->
+                     <!-- This is used to configure the Maven plugin for 
+                        Eclipse. -->
+                     <!-- Among other things, it allows registering goals, 
+                        which Eclipse would otherwise reject. -->
                      <!-- It has no real effect on Maven. -->
                      <groupId>org.eclipse.m2e</groupId>
                      <artifactId>lifecycle-mapping</artifactId>
@@ -104,7 +108,8 @@
                            <pluginExecutions>
                               <pluginExecution>
                                  <!-- Maven processor plugin configuration -->
-                                 <!-- Fixes the errors with Eclipse not recognizing the plugin configuration -->
+                                 <!-- Fixes the errors with Eclipse not recognizing 
+                                    the plugin configuration -->
                                  <pluginExecutionFilter>
                                     <groupId>org.bsc.maven</groupId>
                                     <artifactId>maven-processor-plugin</artifactId>
@@ -115,7 +120,8 @@
                                     </goals>
                                  </pluginExecutionFilter>
                                  <action>
-                                    <!-- As m2e doesn't know what to do with the plugin, it is ignored to avoid error warnings. -->
+                                    <!-- As m2e doesn't know what to do with 
+                                       the plugin, it is ignored to avoid error warnings. -->
                                     <ignore />
                                  </action>
                               </pluginExecution>
@@ -173,6 +179,7 @@
                <groupId>com.h2database</groupId>
                <artifactId>h2</artifactId>
                <version>${h2.version}</version>
+               <scope>test</scope>
             </dependency>
          </dependencies>
       </profile>
@@ -216,6 +223,7 @@
                <groupId>mysql</groupId>
                <artifactId>mysql-connector-java</artifactId>
                <version>${mysql.version}</version>
+               <scope>test</scope>
             </dependency>
          </dependencies>
       </profile>
@@ -237,6 +245,7 @@
                <groupId>org.postgresql</groupId>
                <artifactId>postgresql</artifactId>
                <version>${postgresql.version}</version>
+               <scope>test</scope>
             </dependency>
          </dependencies>
       </profile>
@@ -373,8 +382,6 @@
       <querydsl.version>5.0.0</querydsl.version>
       <slf4j.version>1.7.32</slf4j.version>
       <snakeyaml.version>1.29</snakeyaml.version>
-      <spring.boot.version>2.5.4</spring.boot.version>
-      <spring.data.train.version>2021.0.4</spring.data.train.version>
       <spring.version>5.3.10</spring.version>
       <!-- ============================================== -->
       <!-- ============== PLUGINS VERSIONS ============== -->
@@ -427,7 +434,6 @@
          <groupId>javax.annotation</groupId>
          <artifactId>javax.annotation-api</artifactId>
          <version>${javax.annotation.version}</version>
-         <scope>provided</scope>
       </dependency>
       <!-- ============================================== -->
       <!-- ================== QUERYDSL ================== -->
@@ -525,19 +531,6 @@
          <artifactId>spring-tx</artifactId>
          <scope>test</scope>
       </dependency>
-      <dependency>
-         <!-- Spring Boot Starter: Test -->
-         <groupId>org.springframework.boot</groupId>
-         <artifactId>spring-boot-starter-test</artifactId>
-         <version>${spring.boot.version}</version>
-         <scope>test</scope>
-         <exclusions>
-            <exclusion>
-               <groupId>org.junit.vintage</groupId>
-               <artifactId>junit-vintage-engine</artifactId>
-            </exclusion>
-         </exclusions>
-      </dependency>
       <!-- ********************************************** -->
       <!-- ****************** LOGGERS ******************* -->
       <!-- ********************************************** -->
@@ -580,6 +573,22 @@
 
    <build>
       <defaultGoal>clean package</defaultGoal>
+      <testResources>
+         <testResource>
+            <directory>src/test/resources/</directory>
+         </testResource>
+         <testResource>
+            <!-- Test resources -->
+            <directory>src/test/resources/</directory>
+            <includes>
+               <!-- Filter the contexts -->
+               <include>context/**/*.xml</include>
+               <!-- Filter the properties -->
+               <include>config/**/*.properties</include>
+            </includes>
+            <filtering>true</filtering>
+         </testResource>
+      </testResources>
       <plugins>
          <plugin>
             <!-- Changes -->
@@ -671,6 +680,22 @@
                </dependency>
             </dependencies>
          </plugin>
+         <plugin>
+            <!-- Resources -->
+            <!-- Handles the project resources. -->
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-resources-plugin</artifactId>
+            <configuration>
+               <!-- Variables to to override will be delimited with a @. -->
+               <!-- This avoids collisions with Spring variables. -->
+               <!-- So instead of replacing ${project.name} Maven will replace 
+                  @project.name@. -->
+               <useDefaultDelimiters>false</useDefaultDelimiters>
+               <delimiters>
+                  <delimiter>@</delimiter>
+               </delimiters>
+            </configuration>
+         </plugin>
       </plugins>
    </build>
 
@@ -710,7 +735,8 @@
          </plugin>
          <plugin>
             <!-- PMD -->
-            <!-- Checks that the code complies with a series of code quality rules -->
+            <!-- Checks that the code complies with a series of code quality 
+               rules -->
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-pmd-plugin</artifactId>
             <configuration>
@@ -725,8 +751,8 @@
             </configuration>
          </plugin>
          <plugin>
-            <!-- SpotBugs -->
-            <!-- Checks for patterns which are prone to errors -->
+             <!-- SpotBugs -->
+             <!-- Checks for patterns which are prone to errors -->
             <groupId>com.github.spotbugs</groupId>
             <artifactId>spotbugs-maven-plugin</artifactId>
             <configuration>

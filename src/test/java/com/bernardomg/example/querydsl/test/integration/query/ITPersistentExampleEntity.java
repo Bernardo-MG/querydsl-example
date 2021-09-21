@@ -32,16 +32,13 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
-import com.bernardomg.example.querydsl.Application;
 import com.bernardomg.example.querydsl.model.ExampleEntity;
 import com.bernardomg.example.querydsl.model.QPersistentExampleEntity;
+import com.bernardomg.example.querydsl.test.config.annotation.PersistenceIntegrationTest;
 import com.querydsl.jpa.impl.JPAQuery;
 
-@SpringJUnitConfig
-@SpringBootTest(classes = Application.class)
+@PersistenceIntegrationTest
 @DisplayName("JPA metamodel queries")
 public class ITPersistentExampleEntity {
 
