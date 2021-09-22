@@ -5,7 +5,7 @@ The project is meant to be an example showcasing JPA entities and queries.
 There are some tests included to verify that these work as expected, and can be run with the verify command:
 
 ```
-mvn verify -P h2,eclipselink
+mvn verify -P h2,hibernate
 ```
 
 The tests require two profiles, one defining the database to be used, and another defining the JPA provider.
@@ -28,7 +28,6 @@ Only the in-memory databases, such as H2, do not require additional configuratio
 | Profile     | Provider    |
 |-------------|-------------|
 | hibernate   | Hibernate   |
-| eclipselink | Eclipselink |
 
 ## Differences between databases
 

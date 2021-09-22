@@ -27,7 +27,7 @@ Documentation is also generated from the latest snapshot, taken from the 'develo
 The documentation site sources come along the source code (as it is a Maven site), so it is always possible to generate them using the following Maven command:
 
 ```
-mvn verify site -P h2,eclipselink
+mvn verify site -P h2,hibernate
 ```
 
 The verify phase is required, as otherwise some of the reports won't be created.
@@ -50,14 +50,13 @@ Maven profiles are included for setting up the database and JPA provider.
 | Profile     | Provider    |
 |-------------|-------------|
 | hibernate   | Hibernate   |
-| eclipselink | Eclipselink |
 
 ### Running the tests
 
 The project requires a database and a JPA provider for being able to run the integration tests:
 
 ```
-mvn verify -P h2,eclipselink
+mvn verify -P h2,hibernate
 ```
 
 ### Missing JPA metadata
