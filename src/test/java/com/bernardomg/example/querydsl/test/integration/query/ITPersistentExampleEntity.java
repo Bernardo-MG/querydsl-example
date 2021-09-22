@@ -50,7 +50,6 @@ public class ITPersistentExampleEntity {
      */
     public ITPersistentExampleEntity() {
         super();
-        // TODO: These tests can be done by mocking the repository
     }
 
     @Test
