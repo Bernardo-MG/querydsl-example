@@ -54,9 +54,45 @@ public class ITPersistentExampleEntity {
     }
 
     @Test
-    @DisplayName("Returns all the entities")
+    @DisplayName("Applies filters to queries")
+    @Sql("/sql/test_entity_multiple.sql")
+    public final void testQuery_Filter() {
+        final JPAQuery<ExampleEntity> query;
+        final QPersistentExampleEntity sample;
+        final Collection<ExampleEntity> entities;
+
+        query = new JPAQuery<>(entityManager);
+
+        sample = QPersistentExampleEntity.persistentExampleEntity;
+
+        entities = query.from(sample).where(sample.name.eq("entity_02"))
+                .fetch();
+
+        Assertions.assertEquals(1, entities.size());
+        Assertions.assertEquals("entity_02",
+                entities.iterator().next().getName());
+    }
+
+    @Test
+    @DisplayName("Returns no data when there is no data")
+    public final void testQuery_NoData() {
+        final JPAQuery<ExampleEntity> query;
+        final QPersistentExampleEntity sample;
+        final Collection<ExampleEntity> entities;
+
+        query = new JPAQuery<>(entityManager);
+
+        sample = QPersistentExampleEntity.persistentExampleEntity;
+
+        entities = query.from(sample).fetch();
+
+        Assertions.assertEquals(0, entities.size());
+    }
+
+    @Test
+    @DisplayName("Returns entities with an empty sample")
     @Sql("/sql/test_entity_single.sql")
-    public final void testGetUser_Authorities() {
+    public final void testQuery_NoSample() {
         final JPAQuery<ExampleEntity> query;
         final QPersistentExampleEntity sample;
         final Collection<ExampleEntity> entities;
