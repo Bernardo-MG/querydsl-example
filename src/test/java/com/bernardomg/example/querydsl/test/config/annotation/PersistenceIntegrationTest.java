@@ -6,17 +6,10 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import org.springframework.test.context.TestExecutionListeners;
-import org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
-import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.transaction.annotation.Transactional;
 
 @SpringJUnitConfig(locations = { "classpath:context/test-context.xml" })
-@TestExecutionListeners({ TransactionalTestExecutionListener.class,
-        DependencyInjectionTestExecutionListener.class,
-        SqlScriptsTestExecutionListener.class })
 @Transactional
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
