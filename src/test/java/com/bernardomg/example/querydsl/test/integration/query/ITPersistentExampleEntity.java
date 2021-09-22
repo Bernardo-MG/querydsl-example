@@ -32,6 +32,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.jdbc.Sql;
 
 import com.bernardomg.example.querydsl.model.ExampleEntity;
 import com.bernardomg.example.querydsl.model.QPersistentExampleEntity;
@@ -54,6 +55,7 @@ public class ITPersistentExampleEntity {
 
     @Test
     @DisplayName("Returns all the entities")
+    @Sql("/sql/test_entity_single.sql")
     public final void testGetUser_Authorities() {
         final JPAQuery<ExampleEntity> query;
         final QPersistentExampleEntity sample;
@@ -65,7 +67,7 @@ public class ITPersistentExampleEntity {
 
         entities = query.from(sample).fetch();
 
-        Assertions.assertEquals(30, entities.size());
+        Assertions.assertEquals(1, entities.size());
     }
 
 }
