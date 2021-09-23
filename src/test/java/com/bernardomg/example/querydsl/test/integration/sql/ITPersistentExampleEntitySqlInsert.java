@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-package com.bernardomg.example.querydsl.test.integration.query;
+package com.bernardomg.example.querydsl.test.integration.sql;
 
 import java.lang.reflect.AnnotatedElement;
 import java.util.Objects;
@@ -41,8 +41,8 @@ import com.querydsl.sql.RelationalPathBase;
 import com.querydsl.sql.SQLQueryFactory;
 
 @PersistenceIntegrationTest
-@DisplayName("JPA queries")
-public class ITPersistentExampleEntityCreate {
+@DisplayName("SQL insertion")
+public class ITPersistentExampleEntitySqlInsert {
 
     @Autowired
     private SQLQueryFactory queryFactory;
@@ -50,7 +50,7 @@ public class ITPersistentExampleEntityCreate {
     /**
      * Default constructor.
      */
-    public ITPersistentExampleEntityCreate() {
+    public ITPersistentExampleEntitySqlInsert() {
         super();
     }
 

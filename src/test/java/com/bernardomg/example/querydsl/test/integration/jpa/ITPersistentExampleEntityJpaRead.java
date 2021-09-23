@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-package com.bernardomg.example.querydsl.test.integration.query;
+package com.bernardomg.example.querydsl.test.integration.jpa;
 
 import java.util.Collection;
 
@@ -42,7 +42,7 @@ import com.querydsl.jpa.impl.JPAQuery;
 
 @PersistenceIntegrationTest
 @DisplayName("JPA queries")
-public class ITPersistentExampleEntityRead {
+public class ITPersistentExampleEntityJpaRead {
 
     @Autowired
     private EntityManager entityManager;
@@ -50,7 +50,7 @@ public class ITPersistentExampleEntityRead {
     /**
      * Default constructor.
      */
-    public ITPersistentExampleEntityRead() {
+    public ITPersistentExampleEntityJpaRead() {
         super();
     }
 
