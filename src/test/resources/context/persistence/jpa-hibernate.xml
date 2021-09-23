@@ -14,6 +14,7 @@
    </description>
 
    <import resource="classpath:context/persistence/persistence.xml" />
+   <import resource="classpath:context/persistence/querydsl.xml" />
 
    <!-- JPA EntityManagerFactory -->
    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
@@ -25,7 +26,7 @@
    </bean>
 
    <!-- JPA Adapter -->
-   <bean id="jpaAdapter" class="${jpa.adapter.class}">
+   <bean id="jpaAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
       <property name="database" value="${jpa.database}" />
       <property name="showSql" value="${jpa.showSql}" />
    </bean>
