@@ -26,10 +26,7 @@ package com.bernardomg.example.querydsl.test.integration.jpa;
 
 import java.util.Collection;
 
-import javax.persistence.EntityManager;
-
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,8 +42,6 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 public class ITPersistentExampleEntityJpaDelete {
 
     @Autowired
-    private EntityManager   entityManager;
-
     private JPAQueryFactory queryFactory;
 
     /**
@@ -54,11 +49,6 @@ public class ITPersistentExampleEntityJpaDelete {
      */
     public ITPersistentExampleEntityJpaDelete() {
         super();
-    }
-
-    @BeforeEach
-    public void initializeQuery() {
-        queryFactory = new JPAQueryFactory(entityManager);
     }
 
     @Test

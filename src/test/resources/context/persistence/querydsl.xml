@@ -17,7 +17,13 @@
    <import
       resource="classpath:context/persistence/persistence.xml" />
 
-   <!-- Querydsl Query Factory -->
+   <!-- Querydsl JPA Query Factory -->
+   <bean id="jpaQueryFactory"
+      class="com.querydsl.jpa.impl.JPAQueryFactory">
+      <constructor-arg ref="entityManager" />
+   </bean>
+
+   <!-- Querydsl SQL Query Factory -->
    <bean id="sqlQueryFactory"
       class="com.querydsl.sql.SQLQueryFactory">
       <constructor-arg ref="querydslConfiguration" />

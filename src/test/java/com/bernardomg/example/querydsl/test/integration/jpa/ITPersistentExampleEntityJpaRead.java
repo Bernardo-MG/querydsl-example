@@ -26,10 +26,7 @@ package com.bernardomg.example.querydsl.test.integration.jpa;
 
 import java.util.Collection;
 
-import javax.persistence.EntityManager;
-
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,16 +36,14 @@ import com.bernardomg.example.querydsl.model.ExampleEntity;
 import com.bernardomg.example.querydsl.model.PersistentExampleEntity;
 import com.bernardomg.example.querydsl.model.QPersistentExampleEntity;
 import com.bernardomg.example.querydsl.test.config.annotation.PersistenceIntegrationTest;
-import com.querydsl.jpa.impl.JPAQuery;
+import com.querydsl.jpa.impl.JPAQueryFactory;
 
 @PersistenceIntegrationTest
 @DisplayName("JPA queries")
 public class ITPersistentExampleEntityJpaRead {
 
     @Autowired
-    private EntityManager           entityManager;
-
-    private JPAQuery<ExampleEntity> query;
+    private JPAQueryFactory queryFactory;
 
     /**
      * Default constructor.
@@ -57,22 +52,17 @@ public class ITPersistentExampleEntityJpaRead {
         super();
     }
 
-    @BeforeEach
-    public void initializeQuery() {
-        query = new JPAQuery<>(entityManager);
-    }
-
     @Test
     @DisplayName("Applies filters to queries")
     @Sql("/sql/test_entity_multiple.sql")
     public final void testQuery_Filter() {
         final QPersistentExampleEntity sample;
-        final Collection<ExampleEntity> entities;
+        final Collection<? extends ExampleEntity> entities;
 
         sample = QPersistentExampleEntity.persistentExampleEntity;
 
-        entities = query.from(sample).where(sample.name.eq("entity_02"))
-                .fetch();
+        entities = queryFactory.selectFrom(sample)
+                .where(sample.name.eq("entity_02")).fetch();
 
         Assertions.assertEquals(1, entities.size());
         Assertions.assertEquals("entity_02",
@@ -83,11 +73,11 @@ public class ITPersistentExampleEntityJpaRead {
     @DisplayName("Returns no data when there is no data")
     public final void testQuery_NoData() {
         final QPersistentExampleEntity sample;
-        final Collection<ExampleEntity> entities;
+        final Collection<? extends ExampleEntity> entities;
 
         sample = QPersistentExampleEntity.persistentExampleEntity;
 
-        entities = query.from(sample).fetch();
+        entities = queryFactory.selectFrom(sample).fetch();
 
         Assertions.assertEquals(0, entities.size());
     }
@@ -97,11 +87,11 @@ public class ITPersistentExampleEntityJpaRead {
     @Sql("/sql/test_entity_single.sql")
     public final void testQuery_NoSample() {
         final QPersistentExampleEntity sample;
-        final Collection<ExampleEntity> entities;
+        final Collection<? extends ExampleEntity> entities;
 
         sample = QPersistentExampleEntity.persistentExampleEntity;
 
-        entities = query.from(sample).fetch();
+        entities = queryFactory.selectFrom(sample).fetch();
 
         Assertions.assertEquals(1, entities.size());
     }
@@ -111,11 +101,11 @@ public class ITPersistentExampleEntityJpaRead {
     @Sql("/sql/test_entity_single.sql")
     public final void testQuery_ReturnsEntity() {
         final QPersistentExampleEntity sample;
-        final Collection<ExampleEntity> entities;
+        final Collection<? extends ExampleEntity> entities;
 
         sample = QPersistentExampleEntity.persistentExampleEntity;
 
-        entities = query.from(sample).fetch();
+        entities = queryFactory.selectFrom(sample).fetch();
 
         Assertions.assertEquals(PersistentExampleEntity.class,
                 entities.iterator().next().getClass());
