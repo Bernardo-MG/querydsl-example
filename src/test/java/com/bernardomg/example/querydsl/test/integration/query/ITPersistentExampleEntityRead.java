@@ -41,8 +41,8 @@ import com.bernardomg.example.querydsl.test.config.annotation.PersistenceIntegra
 import com.querydsl.jpa.impl.JPAQuery;
 
 @PersistenceIntegrationTest
-@DisplayName("JPA metamodel queries")
-public class ITPersistentExampleEntity {
+@DisplayName("JPA queries")
+public class ITPersistentExampleEntityRead {
 
     @Autowired
     private EntityManager entityManager;
@@ -50,7 +50,7 @@ public class ITPersistentExampleEntity {
     /**
      * Default constructor.
      */
-    public ITPersistentExampleEntity() {
+    public ITPersistentExampleEntityRead() {
         super();
     }
 
