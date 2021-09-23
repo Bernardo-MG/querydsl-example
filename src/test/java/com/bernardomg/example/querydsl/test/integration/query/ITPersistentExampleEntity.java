@@ -35,6 +35,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.jdbc.Sql;
 
 import com.bernardomg.example.querydsl.model.ExampleEntity;
+import com.bernardomg.example.querydsl.model.PersistentExampleEntity;
 import com.bernardomg.example.querydsl.model.QPersistentExampleEntity;
 import com.bernardomg.example.querydsl.test.config.annotation.PersistenceIntegrationTest;
 import com.querydsl.jpa.impl.JPAQuery;
@@ -104,6 +105,24 @@ public class ITPersistentExampleEntity {
         entities = query.from(sample).fetch();
 
         Assertions.assertEquals(1, entities.size());
+    }
+
+    @Test
+    @DisplayName("Returns the entity class")
+    @Sql("/sql/test_entity_single.sql")
+    public final void testQuery_ReturnsEntity() {
+        final JPAQuery<ExampleEntity> query;
+        final QPersistentExampleEntity sample;
+        final Collection<ExampleEntity> entities;
+
+        query = new JPAQuery<>(entityManager);
+
+        sample = QPersistentExampleEntity.persistentExampleEntity;
+
+        entities = query.from(sample).fetch();
+
+        Assertions.assertEquals(PersistentExampleEntity.class,
+                entities.iterator().next().getClass());
     }
 
 }
