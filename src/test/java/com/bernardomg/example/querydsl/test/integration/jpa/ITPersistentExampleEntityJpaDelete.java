@@ -22,51 +22,49 @@
  * SOFTWARE.
  */
 
-package com.bernardomg.example.querydsl.test.integration.query;
+package com.bernardomg.example.querydsl.test.integration.jpa;
 
 import java.util.Collection;
-
-import javax.persistence.EntityManager;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.jdbc.Sql;
 
 import com.bernardomg.example.querydsl.model.ExampleEntity;
 import com.bernardomg.example.querydsl.model.QPersistentExampleEntity;
 import com.bernardomg.example.querydsl.test.config.annotation.PersistenceIntegrationTest;
-import com.querydsl.jpa.impl.JPAQuery;
+import com.querydsl.jpa.impl.JPAQueryFactory;
 
 @PersistenceIntegrationTest
-@DisplayName("JPA metamodel queries")
-public class ITPersistentExampleEntity {
+@DisplayName("JPA queries")
+public class ITPersistentExampleEntityJpaDelete {
 
     @Autowired
-    private EntityManager entityManager;
+    private JPAQueryFactory queryFactory;
 
     /**
      * Default constructor.
      */
-    public ITPersistentExampleEntity() {
+    public ITPersistentExampleEntityJpaDelete() {
         super();
-        // TODO: These tests can be done by mocking the repository
     }
 
     @Test
-    @DisplayName("Returns all the entities")
-    public final void testGetUser_Authorities() {
-        final JPAQuery<ExampleEntity> query;
+    @DisplayName("Returns entities with an empty sample")
+    @Sql("/sql/test_entity_single.sql")
+    public final void testQuery_NoSample() {
         final QPersistentExampleEntity sample;
-        final Collection<ExampleEntity> entities;
-
-        query = new JPAQuery<>(entityManager);
+        final Collection<? extends ExampleEntity> entities;
 
         sample = QPersistentExampleEntity.persistentExampleEntity;
 
-        entities = query.from(sample).fetch();
+        queryFactory.delete(sample).execute();
 
-        Assertions.assertEquals(30, entities.size());
+        entities = queryFactory.selectFrom(sample).fetch();
+
+        Assertions.assertEquals(0, entities.size());
     }
 
 }

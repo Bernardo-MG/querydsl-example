@@ -36,6 +36,7 @@
       </menu>
       <menu name="Documentation" inherit="bottom">
          <item name="Usage" href="./usage.html" />
+         <item name="Metamodel" href="./metamodel.html" />
       </menu>
       <menu name="Info and reports" inherit="bottom">
          <item name="Info" href="./info.html" />
