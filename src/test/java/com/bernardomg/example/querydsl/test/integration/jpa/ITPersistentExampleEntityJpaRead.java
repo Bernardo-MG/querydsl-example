@@ -29,6 +29,7 @@ import java.util.Collection;
 import javax.persistence.EntityManager;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +46,9 @@ import com.querydsl.jpa.impl.JPAQuery;
 public class ITPersistentExampleEntityJpaRead {
 
     @Autowired
-    private EntityManager entityManager;
+    private EntityManager           entityManager;
+
+    private JPAQuery<ExampleEntity> query;
 
     /**
      * Default constructor.
@@ -54,15 +57,17 @@ public class ITPersistentExampleEntityJpaRead {
         super();
     }
 
+    @BeforeEach
+    public void initializeQuery() {
+        query = new JPAQuery<>(entityManager);
+    }
+
     @Test
     @DisplayName("Applies filters to queries")
     @Sql("/sql/test_entity_multiple.sql")
     public final void testQuery_Filter() {
-        final JPAQuery<ExampleEntity> query;
         final QPersistentExampleEntity sample;
         final Collection<ExampleEntity> entities;
-
-        query = new JPAQuery<>(entityManager);
 
         sample = QPersistentExampleEntity.persistentExampleEntity;
 
@@ -77,11 +82,8 @@ public class ITPersistentExampleEntityJpaRead {
     @Test
     @DisplayName("Returns no data when there is no data")
     public final void testQuery_NoData() {
-        final JPAQuery<ExampleEntity> query;
         final QPersistentExampleEntity sample;
         final Collection<ExampleEntity> entities;
-
-        query = new JPAQuery<>(entityManager);
 
         sample = QPersistentExampleEntity.persistentExampleEntity;
 
@@ -94,11 +96,8 @@ public class ITPersistentExampleEntityJpaRead {
     @DisplayName("Returns entities with an empty sample")
     @Sql("/sql/test_entity_single.sql")
     public final void testQuery_NoSample() {
-        final JPAQuery<ExampleEntity> query;
         final QPersistentExampleEntity sample;
         final Collection<ExampleEntity> entities;
-
-        query = new JPAQuery<>(entityManager);
 
         sample = QPersistentExampleEntity.persistentExampleEntity;
 
@@ -111,11 +110,8 @@ public class ITPersistentExampleEntityJpaRead {
     @DisplayName("Returns the entity class")
     @Sql("/sql/test_entity_single.sql")
     public final void testQuery_ReturnsEntity() {
-        final JPAQuery<ExampleEntity> query;
         final QPersistentExampleEntity sample;
         final Collection<ExampleEntity> entities;
-
-        query = new JPAQuery<>(entityManager);
 
         sample = QPersistentExampleEntity.persistentExampleEntity;
 
