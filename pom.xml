@@ -379,9 +379,9 @@
       <liquibase.version>4.4.3</liquibase.version>
       <log4j.version>2.14.1</log4j.version>
       <mysql.version>8.0.21</mysql.version>
-      <postgresql.version>42.2.23</postgresql.version>
+      <postgresql.version>42.2.24</postgresql.version>
       <querydsl.version>5.0.0</querydsl.version>
-      <slf4j.version>1.7.32</slf4j.version>
+      <slf4j.version>2.0.0-alpha1</slf4j.version>
       <snakeyaml.version>1.29</snakeyaml.version>
       <spring.version>5.3.10</spring.version>
       <!-- ============================================== -->
