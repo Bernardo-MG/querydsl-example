@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-package com.bernardomg.example.querydsl.model;
+package com.bernardomg.example.querydsl.jpa.model;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 

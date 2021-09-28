@@ -34,8 +34,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.bernardomg.example.querydsl.model.PersistentExampleEntity;
-import com.bernardomg.example.querydsl.model.QPersistentExampleEntity;
+import com.bernardomg.example.querydsl.jpa.model.PersistentExampleEntity;
+import com.bernardomg.example.querydsl.jpa.model.QPersistentExampleEntity;
 import com.bernardomg.example.querydsl.test.config.jpa.annotation.JpaPersistenceIntegrationTest;
 import com.querydsl.sql.RelationalPathBase;
 import com.querydsl.sql.SQLQueryFactory;
