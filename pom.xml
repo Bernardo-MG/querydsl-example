@@ -736,7 +736,7 @@
                </links>
                <sourceFileExcludes>
                   <!-- Excludes metamodel -->
-                  <exclude>**/Q*Entity</exclude>
+                  <exclude>**/Q*Entity*</exclude>
                </sourceFileExcludes>
             </configuration>
          </plugin>
@@ -753,7 +753,7 @@
                </rulesets>
                <excludes>
                   <!-- Excludes metamodel -->
-                  <exclude>**/Q*Entity</exclude>
+                  <exclude>**/Q*Entity*</exclude>
                </excludes>
             </configuration>
          </plugin>
