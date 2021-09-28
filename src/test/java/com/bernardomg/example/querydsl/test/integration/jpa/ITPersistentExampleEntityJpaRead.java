@@ -35,10 +35,10 @@ import org.springframework.test.context.jdbc.Sql;
 import com.bernardomg.example.querydsl.model.ExampleEntity;
 import com.bernardomg.example.querydsl.model.PersistentExampleEntity;
 import com.bernardomg.example.querydsl.model.QPersistentExampleEntity;
-import com.bernardomg.example.querydsl.test.config.annotation.PersistenceIntegrationTest;
+import com.bernardomg.example.querydsl.test.config.jpa.annotation.JpaPersistenceIntegrationTest;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
-@PersistenceIntegrationTest
+@JpaPersistenceIntegrationTest
 @DisplayName("JPA queries")
 public class ITPersistentExampleEntityJpaRead {
 

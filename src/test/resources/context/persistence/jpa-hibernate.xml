@@ -27,7 +27,7 @@
 
    <!-- JPA Adapter -->
    <bean id="jpaAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
-      <property name="database" value="${jpa.database}" />
+      <property name="database" value="${persistence.database}" />
       <property name="showSql" value="${jpa.showSql}" />
    </bean>
 

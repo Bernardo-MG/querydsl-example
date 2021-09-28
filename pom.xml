@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
    <modelVersion>4.0.0</modelVersion>
@@ -180,6 +179,28 @@
             </dependency>
          </dependencies>
       </profile>
+      <profile>
+         <!-- Mongo database profile -->
+         <!-- Prepares the project to make use of a Mongo in-memory database -->
+         <id>mongo</id>
+         <properties>
+            <!-- Access data -->
+            <database.url>jdbc:h2:mem:jpa_test</database.url>
+            <database.username>sa</database.username>
+            <database.password></database.password>
+            <!-- Spring context -->
+            <spring.profile.database>h2</spring.profile.database>
+         </properties>
+         <dependencies>
+            <dependency>
+               <!-- Embedded Mongo -->
+               <groupId>de.flapdoodle.embed</groupId>
+               <artifactId>de.flapdoodle.embed.mongo</artifactId>
+               <version>${mongo.embedded.version}</version>
+               <scope>test</scope>
+            </dependency>
+         </dependencies>
+      </profile>
       <!-- ============================================== -->
       <!-- ============ JPA PROVIDER PROFILES =========== -->
       <!-- ============================================== -->
@@ -283,11 +304,13 @@
       <junit.platform.version>1.8.0</junit.platform.version>
       <liquibase.version>4.4.3</liquibase.version>
       <log4j.version>2.14.1</log4j.version>
+      <mongo.embedded.version>3.0.0</mongo.embedded.version>
       <mysql.version>8.0.21</mysql.version>
       <postgresql.version>42.2.24</postgresql.version>
       <querydsl.version>5.0.0</querydsl.version>
       <slf4j.version>2.0.0-alpha5</slf4j.version>
       <snakeyaml.version>1.29</snakeyaml.version>
+      <spring.data.train.version>2021.0.4</spring.data.train.version>
       <spring.version>5.3.10</spring.version>
       <!-- ============================================== -->
       <!-- ============== PLUGINS VERSIONS ============== -->
@@ -310,6 +333,14 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-framework-bom</artifactId>
             <version>${spring.version}</version>
+            <type>pom</type>
+            <scope>import</scope>
+         </dependency>
+         <dependency>
+            <!-- Spring Data BOM -->
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-bom</artifactId>
+            <version>${spring.data.train.version}</version>
             <type>pom</type>
             <scope>import</scope>
          </dependency>
@@ -424,6 +455,12 @@
          <artifactId>spring-tx</artifactId>
          <scope>test</scope>
       </dependency>
+      <dependency>
+         <!-- Spring Data Mongo DB -->
+         <groupId>org.springframework.data</groupId>
+         <artifactId>spring-data-mongodb</artifactId>
+         <scope>test</scope>
+      </dependency>
       <!-- ********************************************** -->
       <!-- ****************** QUERYDSL ****************** -->
       <!-- ********************************************** -->
@@ -440,6 +477,18 @@
          <artifactId>querydsl-jpa</artifactId>
          <version>${querydsl.version}</version>
          <scope>test</scope>
+      </dependency>
+      <dependency>
+         <!-- Querydsl APT -->
+         <groupId>com.querydsl</groupId>
+         <artifactId>querydsl-apt</artifactId>
+         <version>${querydsl.version}</version>
+      </dependency>
+      <dependency>
+         <!-- Querydsl Mongo -->
+         <groupId>com.querydsl</groupId>
+         <artifactId>querydsl-mongodb</artifactId>
+         <version>${querydsl.version}</version>
       </dependency>
       <!-- ********************************************** -->
       <!-- ******************** JPA ********************* -->
@@ -590,14 +639,6 @@
                   </configuration>
                </execution>
             </executions>
-            <dependencies>
-               <dependency>
-                  <!-- Querydsl APT -->
-                  <groupId>com.querydsl</groupId>
-                  <artifactId>querydsl-apt</artifactId>
-                  <version>${querydsl.version}</version>
-               </dependency>
-            </dependencies>
          </plugin>
          <plugin>
             <!-- Resources -->
@@ -607,8 +648,7 @@
             <configuration>
                <!-- Variables to to override will be delimited with a @. -->
                <!-- This avoids collisions with Spring variables. -->
-               <!-- So instead of replacing ${project.name} Maven will replace 
-                  @project.name@. -->
+               <!-- So instead of replacing ${project.name} Maven will replace @project.name@. -->
                <useDefaultDelimiters>false</useDefaultDelimiters>
                <delimiters>
                   <delimiter>@</delimiter>
@@ -654,8 +694,7 @@
          </plugin>
          <plugin>
             <!-- PMD -->
-            <!-- Checks that the code complies with a series of code quality 
-               rules -->
+            <!-- Checks that the code complies with a series of code quality rules -->
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-pmd-plugin</artifactId>
             <configuration>

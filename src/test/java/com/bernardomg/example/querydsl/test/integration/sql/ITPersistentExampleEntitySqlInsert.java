@@ -36,11 +36,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.bernardomg.example.querydsl.model.PersistentExampleEntity;
 import com.bernardomg.example.querydsl.model.QPersistentExampleEntity;
-import com.bernardomg.example.querydsl.test.config.annotation.PersistenceIntegrationTest;
+import com.bernardomg.example.querydsl.test.config.jpa.annotation.JpaPersistenceIntegrationTest;
 import com.querydsl.sql.RelationalPathBase;
 import com.querydsl.sql.SQLQueryFactory;
 
-@PersistenceIntegrationTest
+@JpaPersistenceIntegrationTest
 @DisplayName("SQL insertion")
 public class ITPersistentExampleEntitySqlInsert {
 
