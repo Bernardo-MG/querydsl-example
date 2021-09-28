@@ -412,20 +412,14 @@
    </dependencyManagement>
 
    <dependencies>
+      <!-- ============================================== -->
+      <!-- ==================== GUAVA =================== -->
+      <!-- ============================================== -->
       <dependency>
          <!-- Guava -->
          <groupId>com.google.guava</groupId>
          <artifactId>guava</artifactId>
          <version>${guava.version}</version>
-      </dependency>
-      <!-- ============================================== -->
-      <!-- ==================== JPA ===================== -->
-      <!-- ============================================== -->
-      <dependency>
-         <!-- JPA API -->
-         <groupId>javax.persistence</groupId>
-         <artifactId>javax.persistence-api</artifactId>
-         <version>${javaee.api.version}</version>
       </dependency>
       <!-- ============================================== -->
       <!-- ==================== JAVAX =================== -->
@@ -440,23 +434,10 @@
       <!-- ================== QUERYDSL ================== -->
       <!-- ============================================== -->
       <dependency>
-         <!-- Querydsl Spring -->
+         <!-- Querydsl Core -->
          <groupId>com.querydsl</groupId>
-         <artifactId>querydsl-sql-spring</artifactId>
+         <artifactId>querydsl-core</artifactId>
          <version>${querydsl.version}</version>
-      </dependency>
-      <dependency>
-         <!-- Querydsl JPA -->
-         <groupId>com.querydsl</groupId>
-         <artifactId>querydsl-jpa</artifactId>
-         <version>${querydsl.version}</version>
-      </dependency>
-      <dependency>
-         <!-- Querydsl APT -->
-         <groupId>com.querydsl</groupId>
-         <artifactId>querydsl-apt</artifactId>
-         <version>${querydsl.version}</version>
-         <scope>provided</scope>
       </dependency>
       <!-- ============================================== -->
       <!-- ======= TEST ENVIRONMENT DEPENDENCIES ======== -->
@@ -537,6 +518,32 @@
          <groupId>org.springframework</groupId>
          <artifactId>spring-tx</artifactId>
          <scope>test</scope>
+      </dependency>
+      <!-- ********************************************** -->
+      <!-- ****************** QUERYDSL ****************** -->
+      <!-- ********************************************** -->
+      <dependency>
+         <!-- Querydsl Spring -->
+         <groupId>com.querydsl</groupId>
+         <artifactId>querydsl-sql-spring</artifactId>
+         <version>${querydsl.version}</version>
+         <scope>test</scope>
+      </dependency>
+      <dependency>
+         <!-- Querydsl JPA -->
+         <groupId>com.querydsl</groupId>
+         <artifactId>querydsl-jpa</artifactId>
+         <version>${querydsl.version}</version>
+         <scope>test</scope>
+      </dependency>
+      <!-- ********************************************** -->
+      <!-- ******************** JPA ********************* -->
+      <!-- ********************************************** -->
+      <dependency>
+         <!-- JPA API -->
+         <groupId>javax.persistence</groupId>
+         <artifactId>javax.persistence-api</artifactId>
+         <version>${javaee.api.version}</version>
       </dependency>
       <!-- ********************************************** -->
       <!-- ****************** LOGGERS ******************* -->
