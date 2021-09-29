@@ -41,10 +41,10 @@
       <junit.platform.version>1.8.0</junit.platform.version>
       <log4j.version>2.14.1</log4j.version>
       <mongo.embedded.version>3.0.0</mongo.embedded.version>
-      <morphia.version>2.2.1</morphia.version>
+      <mongo.version>4.0.5</mongo.version>
       <querydsl.version>5.0.0</querydsl.version>
       <slf4j.version>2.0.0-alpha5</slf4j.version>
-      <spring.data.train.version>2021.0.4</spring.data.train.version>
+      <spring.data.version>3.0.3.RELEASE</spring.data.version>
       <spring.version>5.3.10</spring.version>
       <!-- ============================================== -->
       <!-- ============== PLUGINS VERSIONS ============== -->
@@ -62,14 +62,6 @@
 
    <dependencyManagement>
       <dependencies>
-         <dependency>
-            <!-- Spring Data BOM -->
-            <groupId>org.springframework.data</groupId>
-            <artifactId>spring-data-bom</artifactId>
-            <version>${spring.data.train.version}</version>
-            <type>pom</type>
-            <scope>import</scope>
-         </dependency>
          <dependency>
             <!-- Spring Framework BOM -->
             <groupId>org.springframework</groupId>
@@ -98,6 +90,7 @@
          <!-- Spring Data Mongo DB -->
          <groupId>org.springframework.data</groupId>
          <artifactId>spring-data-mongodb</artifactId>
+         <version>${spring.data.version}</version>
       </dependency>
       <!-- ============================================== -->
       <!-- ================== QUERYDSL ================== -->
@@ -119,16 +112,16 @@
          <scope>test</scope>
       </dependency>
       <dependency>
-         <!-- Morphia -->
-         <groupId>dev.morphia.morphia</groupId>
-         <artifactId>morphia-core</artifactId>
-         <version>${morphia.version}</version>
-         <exclusions>
-            <exclusion>
-               <groupId>io.github.classgraph</groupId>
-               <artifactId>classgraph</artifactId>
-            </exclusion>
-         </exclusions>
+         <!-- Mongo Driver Core -->
+         <groupId>org.mongodb</groupId>
+         <artifactId>mongodb-driver-core</artifactId>
+         <version>${mongo.version}</version>
+      </dependency>
+      <dependency>
+         <!-- Mongo Driver Sync -->
+         <groupId>org.mongodb</groupId>
+         <artifactId>mongodb-driver-sync</artifactId>
+         <version>${mongo.version}</version>
       </dependency>
       <!-- ============================================== -->
       <!-- ======= TEST ENVIRONMENT DEPENDENCIES ======== -->
@@ -337,7 +330,7 @@
                   <phase>generate-sources</phase>
                   <configuration>
                      <processors>
-                        <processor>com.querydsl.apt.morphia.MorphiaAnnotationProcessor</processor>
+                        <processor>org.springframework.data.mongodb.repository.support.MongoAnnotationProcessor</processor>
                      </processors>
                   </configuration>
                </execution>

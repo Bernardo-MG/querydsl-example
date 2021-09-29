@@ -185,9 +185,8 @@
          <id>mongo</id>
          <properties>
             <!-- Access data -->
-            <database.url>mongodb://localhost:27017/testdb</database.url>
-            <database.username>username</database.username>
-            <database.password></database.password>
+            <database.uri>mongodb://username:password@localhost:27017/testdb</database.uri>
+            <database.name>testdb</database.name>
             <!-- Spring context -->
             <spring.profile.database>mongo</spring.profile.database>
          </properties>
