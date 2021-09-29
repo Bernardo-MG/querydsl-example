@@ -19,5 +19,6 @@
 
    <!-- Contexts -->
    <import resource="classpath:context/persistence/mongo.xml" />
+   <import resource="classpath:context/persistence/persistence.xml" />
 
 </beans>

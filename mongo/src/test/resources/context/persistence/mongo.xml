@@ -12,8 +12,6 @@
       Mongodb persistence layer.
    </description>
 
-   <import resource="classpath:context/persistence/querydsl.xml" />
-
    <mongo:mongo-client id="mongoClient" host="localhost" />
 
    <mongo:db-factory id="mongoDbFactory" dbname="test" mongo-client-ref="mongoClient" />
