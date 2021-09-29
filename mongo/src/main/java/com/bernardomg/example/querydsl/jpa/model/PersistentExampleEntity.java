@@ -28,13 +28,10 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.util.Objects;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 import com.google.common.base.MoreObjects;
 
@@ -45,8 +42,7 @@ import com.google.common.base.MoreObjects;
  *
  * @author Bernardo Mart&iacute;nez Garrido
  */
-@Entity(name = "ExampleEntity")
-@Table(name = "example_entities")
+@Document("ExampleEntity")
 public class PersistentExampleEntity implements ExampleEntity {
 
     /**
@@ -59,8 +55,6 @@ public class PersistentExampleEntity implements ExampleEntity {
      * Entity's ID.
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false, unique = true)
     private Integer           id               = -1;
 
     /**
@@ -69,7 +63,7 @@ public class PersistentExampleEntity implements ExampleEntity {
      * This is to have additional data apart from the id, to be used on the
      * tests.
      */
-    @Column(name = "name", nullable = false, unique = true)
+    @Field(name = "name")
     private String            name             = "";
 
     /**
