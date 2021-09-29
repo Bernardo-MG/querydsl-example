@@ -187,13 +187,6 @@
          <scope>test</scope>
       </dependency>
       <dependency>
-         <!-- Querydsl JPA -->
-         <groupId>com.querydsl</groupId>
-         <artifactId>querydsl-jpa</artifactId>
-         <version>${querydsl.version}</version>
-         <scope>test</scope>
-      </dependency>
-      <dependency>
          <!-- Querydsl APT -->
          <groupId>com.querydsl</groupId>
          <artifactId>querydsl-apt</artifactId>
@@ -323,7 +316,7 @@
             <version>${plugin.processor.version}</version>
             <executions>
                <execution>
-                  <id>generate-jpa-metamodel</id>
+                  <id>generate-metamodel</id>
                   <goals>
                      <goal>process</goal>
                   </goals>

@@ -494,7 +494,7 @@
             <version>${plugin.processor.version}</version>
             <executions>
                <execution>
-                  <id>generate-jpa-metamodel</id>
+                  <id>generate-metamodel</id>
                   <goals>
                      <goal>process</goal>
                   </goals>
