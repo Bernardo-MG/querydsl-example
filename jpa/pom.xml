@@ -33,12 +33,34 @@
       <!-- ============= DATABASE PROFILES ============== -->
       <!-- ============================================== -->
       <profile>
+         <!-- Default database profile -->
+         <!-- Required when the tests are disabled -->
+         <id>default</id>
+         <properties>
+            <!-- Access data -->
+            <database.url>jdbc:h2:mem:testdb</database.url>
+            <database.username>sa</database.username>
+            <database.password></database.password>
+            <!-- Spring context -->
+            <spring.profile.database>h2</spring.profile.database>
+         </properties>
+         <dependencies>
+            <dependency>
+               <!-- H2 database -->
+               <groupId>com.h2database</groupId>
+               <artifactId>h2</artifactId>
+               <version>${h2.version}</version>
+               <scope>test</scope>
+            </dependency>
+         </dependencies>
+      </profile>
+      <profile>
          <!-- H2 database profile -->
          <!-- Prepares the project to make use of an H2 in-memory database -->
          <id>h2</id>
          <properties>
             <!-- Access data -->
-            <database.url>jdbc:h2:mem:jpa_test</database.url>
+            <database.url>jdbc:h2:mem:testdb</database.url>
             <database.username>sa</database.username>
             <database.password></database.password>
             <!-- Spring context -->
@@ -60,7 +82,7 @@
          <id>hsqldb</id>
          <properties>
             <!-- Access data -->
-            <database.url>jdbc:hsqldb:mem:jpa_test</database.url>
+            <database.url>jdbc:hsqldb:mem:testdb</database.url>
             <database.username>sa</database.username>
             <database.password></database.password>
             <!-- Spring context -->
@@ -82,7 +104,7 @@
          <id>mysql</id>
          <properties>
             <!-- Access data -->
-            <database.url>jdbc:mysql://localhost:3306/jpa_test</database.url>
+            <database.url>jdbc:mysql://localhost:3306/testdb</database.url>
             <database.username>root</database.username>
             <database.password>root</database.password>
             <!-- Spring context -->
@@ -104,7 +126,7 @@
          <id>postgres</id>
          <properties>
             <!-- Access data -->
-            <database.url>jdbc:postgresql://localhost:5432/jpa_test</database.url>
+            <database.url>jdbc:postgresql://localhost:5432/testdb</database.url>
             <database.username>postgres</database.username>
             <database.password>postgres</database.password>
             <!-- Spring context -->
@@ -127,7 +149,6 @@
    <!-- ********************************************** -->
 
    <properties>
-      <spring.profile.database>none</spring.profile.database>
       <!-- ============================================== -->
       <!-- =============== MANIFEST DATA ================ -->
       <!-- ============================================== -->

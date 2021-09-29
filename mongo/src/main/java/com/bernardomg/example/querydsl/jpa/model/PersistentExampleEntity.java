@@ -30,10 +30,11 @@ import java.util.Objects;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
 
 import com.google.common.base.MoreObjects;
+
+import dev.morphia.annotations.Entity;
+import dev.morphia.annotations.Property;
 
 /**
  * Persistent entity for the example application.
@@ -42,7 +43,7 @@ import com.google.common.base.MoreObjects;
  *
  * @author Bernardo Mart&iacute;nez Garrido
  */
-@Document("ExampleEntity")
+@Entity("example_entities")
 public class PersistentExampleEntity implements ExampleEntity {
 
     /**
@@ -63,7 +64,7 @@ public class PersistentExampleEntity implements ExampleEntity {
      * This is to have additional data apart from the id, to be used on the
      * tests.
      */
-    @Field(name = "name")
+    @Property("name")
     private String            name             = "";
 
     /**

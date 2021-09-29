@@ -25,38 +25,6 @@
    <description>An example showing how to use Querydsl</description>
 
    <!-- ********************************************** -->
-   <!-- ****************** PROFILES ****************** -->
-   <!-- ********************************************** -->
-
-   <profiles>
-      <!-- ============================================== -->
-      <!-- ============= DATABASE PROFILES ============== -->
-      <!-- ============================================== -->
-      <profile>
-         <!-- Mongo database profile -->
-         <!-- Prepares the project to make use of a Mongo in-memory database -->
-         <id>mongo</id>
-         <properties>
-            <!-- Access data -->
-            <database.url>jdbc:h2:mem:jpa_test</database.url>
-            <database.username>sa</database.username>
-            <database.password></database.password>
-            <!-- Spring context -->
-            <spring.profile.database>h2</spring.profile.database>
-         </properties>
-         <dependencies>
-            <dependency>
-               <!-- Embedded Mongo -->
-               <groupId>de.flapdoodle.embed</groupId>
-               <artifactId>de.flapdoodle.embed.mongo</artifactId>
-               <version>${mongo.embedded.version}</version>
-               <scope>test</scope>
-            </dependency>
-         </dependencies>
-      </profile>
-   </profiles>
-
-   <!-- ********************************************** -->
    <!-- **************** PROPERTIES ****************** -->
    <!-- ********************************************** -->
 
@@ -72,6 +40,8 @@
       <junit.jupiter.version>5.8.0</junit.jupiter.version>
       <junit.platform.version>1.8.0</junit.platform.version>
       <log4j.version>2.14.1</log4j.version>
+      <mongo.embedded.version>3.0.0</mongo.embedded.version>
+      <morphia.version>2.2.1</morphia.version>
       <querydsl.version>5.0.0</querydsl.version>
       <slf4j.version>2.0.0-alpha5</slf4j.version>
       <spring.data.train.version>2021.0.4</spring.data.train.version>
@@ -137,6 +107,28 @@
          <groupId>com.querydsl</groupId>
          <artifactId>querydsl-core</artifactId>
          <version>${querydsl.version}</version>
+      </dependency>
+      <!-- ============================================== -->
+      <!-- ================== MONGO ================== -->
+      <!-- ============================================== -->
+      <dependency>
+         <!-- Embedded Mongo -->
+         <groupId>de.flapdoodle.embed</groupId>
+         <artifactId>de.flapdoodle.embed.mongo</artifactId>
+         <version>${mongo.embedded.version}</version>
+         <scope>test</scope>
+      </dependency>
+      <dependency>
+         <!-- Morphia -->
+         <groupId>dev.morphia.morphia</groupId>
+         <artifactId>morphia-core</artifactId>
+         <version>${morphia.version}</version>
+         <exclusions>
+            <exclusion>
+               <groupId>io.github.classgraph</groupId>
+               <artifactId>classgraph</artifactId>
+            </exclusion>
+         </exclusions>
       </dependency>
       <!-- ============================================== -->
       <!-- ======= TEST ENVIRONMENT DEPENDENCIES ======== -->
@@ -345,7 +337,7 @@
                   <phase>generate-sources</phase>
                   <configuration>
                      <processors>
-                        <processor>org.springframework.data.mongodb.repository.support.MongoAnnotationProcessor</processor>
+                        <processor>com.querydsl.apt.morphia.MorphiaAnnotationProcessor</processor>
                      </processors>
                   </configuration>
                </execution>

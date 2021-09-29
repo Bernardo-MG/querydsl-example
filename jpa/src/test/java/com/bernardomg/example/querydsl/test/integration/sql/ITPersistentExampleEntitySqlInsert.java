@@ -43,7 +43,7 @@ import com.querydsl.sql.SQLQueryFactory;
 
 @JpaPersistenceIntegrationTest
 @DisplayName("SQL insertion")
-@EnabledIf(expression = "#{'!${persistence.database}'.equals('mongo')}",
+@EnabledIf(expression = "#{!'${persistence.database}'.equals('mongo')}",
         reason = "Requires relational database")
 public class ITPersistentExampleEntitySqlInsert {
 

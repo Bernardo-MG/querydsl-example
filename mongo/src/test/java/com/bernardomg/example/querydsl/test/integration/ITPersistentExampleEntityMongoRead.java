@@ -25,6 +25,7 @@
 package com.bernardomg.example.querydsl.test.integration;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.springframework.test.context.junit.jupiter.EnabledIf;
 
 import com.bernardomg.example.querydsl.test.config.mongo.annotation.MongoPersistenceIntegrationTest;
@@ -32,7 +33,7 @@ import com.bernardomg.example.querydsl.test.config.mongo.annotation.MongoPersist
 @MongoPersistenceIntegrationTest
 @DisplayName("Mongo queries")
 @EnabledIf(expression = "#{'${persistence.database}'.equals('mongo')}",
-        reason = "Requires MongoDB")
+        reason = "Requires MongoDB", loadContext = true)
 public class ITPersistentExampleEntityMongoRead {
 
     /**
@@ -40,6 +41,11 @@ public class ITPersistentExampleEntityMongoRead {
      */
     public ITPersistentExampleEntityMongoRead() {
         super();
+    }
+
+    @Test
+    public void placeholder() {
+
     }
 
 }

@@ -40,7 +40,7 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 
 @JpaPersistenceIntegrationTest
 @DisplayName("JPA queries")
-@EnabledIf(expression = "#{'!${persistence.database}'.equals('mongo')}",
+@EnabledIf(expression = "#{!'${persistence.database}'.equals('mongo')}",
         reason = "Requires relational database")
 public class ITPersistentExampleEntityJpaDelete {
 
