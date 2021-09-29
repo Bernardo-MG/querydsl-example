@@ -18,7 +18,6 @@
    <!-- **************** PROJECT INFO **************** -->
    <!-- ********************************************** -->
 
-   <groupId>com.bernardomg.example</groupId>
    <artifactId>jpa</artifactId>
    <packaging>jar</packaging>
 
@@ -513,68 +512,5 @@
          </plugin>
       </plugins>
    </build>
-
-   <!-- ********************************************** -->
-   <!-- ****************** REPORTS ******************* -->
-   <!-- ********************************************** -->
-
-   <reporting>
-      <plugins>
-         <plugin>
-            <!-- Checkstyle -->
-            <!-- Checks that the source files comply with style standards -->
-            <!-- It is using a customized rules file -->
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-checkstyle-plugin</artifactId>
-            <configuration>
-               <!-- The customized rules file -->
-               <configLocation>${project.basedir}/src/config/checkstyle/checkstyle-rules.xml</configLocation>
-               <!-- Excludes metamodel -->
-               <exclude>**/Q*Entity</exclude>
-            </configuration>
-         </plugin>
-         <plugin>
-            <!-- Javadoc -->
-            <!-- Generates the javadocs -->
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-javadoc-plugin</artifactId>
-            <configuration>
-               <links>
-                  <link>https://javadoc.io/doc/org.eclipse.persistence/javax.persistence/</link>
-               </links>
-               <sourceFileExcludes>
-                  <!-- Excludes metamodel -->
-                  <exclude>**/Q*Entity*</exclude>
-               </sourceFileExcludes>
-            </configuration>
-         </plugin>
-         <plugin>
-            <!-- PMD -->
-            <!-- Checks that the code complies with a series of code quality rules -->
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-pmd-plugin</artifactId>
-            <configuration>
-               <rulesets>
-                  <!-- The customized rules file -->
-                  <ruleset>${project.basedir}/src/config/pmd/pmd-rules.xml</ruleset>
-               </rulesets>
-               <excludes>
-                  <!-- Excludes metamodel -->
-                  <exclude>**/Q*Entity*</exclude>
-               </excludes>
-            </configuration>
-         </plugin>
-         <plugin>
-            <!-- SpotBugs -->
-            <!-- Checks for patterns which are prone to errors -->
-            <groupId>com.github.spotbugs</groupId>
-            <artifactId>spotbugs-maven-plugin</artifactId>
-            <configuration>
-               <!-- Exclusion patterns -->
-               <excludeFilterFile>${project.basedir}/src/config/spotbugs/spotbugs-exclude.xml</excludeFilterFile>
-            </configuration>
-         </plugin>
-      </plugins>
-   </reporting>
 
 </project>

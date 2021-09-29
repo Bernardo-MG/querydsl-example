@@ -22,49 +22,24 @@
  * SOFTWARE.
  */
 
-package com.bernardomg.example.querydsl.test.integration.jpa;
+package com.bernardomg.example.querydsl.test.integration;
 
-import java.util.Collection;
-
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.jdbc.Sql;
+import org.springframework.test.context.junit.jupiter.EnabledIf;
 
-import com.bernardomg.example.querydsl.jpa.model.ExampleEntity;
-import com.bernardomg.example.querydsl.jpa.model.QPersistentExampleEntity;
-import com.bernardomg.example.querydsl.test.config.jpa.annotation.JpaPersistenceIntegrationTest;
-import com.querydsl.jpa.impl.JPAQueryFactory;
+import com.bernardomg.example.querydsl.test.config.mongo.annotation.MongoPersistenceIntegrationTest;
 
-@JpaPersistenceIntegrationTest
-@DisplayName("JPA queries")
-public class ITPersistentExampleEntityJpaDelete {
-
-    @Autowired
-    private JPAQueryFactory queryFactory;
+@MongoPersistenceIntegrationTest
+@DisplayName("Mongo queries")
+@EnabledIf(expression = "#{'${persistence.database}'.equals('mongo')}",
+        reason = "Requires MongoDB", loadContext = true)
+public class ITPersistentExampleEntityMongoRead {
 
     /**
      * Default constructor.
      */
-    public ITPersistentExampleEntityJpaDelete() {
+    public ITPersistentExampleEntityMongoRead() {
         super();
-    }
-
-    @Test
-    @DisplayName("Returns entities with an empty sample")
-    @Sql("/sql/test_entity_single.sql")
-    public final void testQuery_NoSample() {
-        final QPersistentExampleEntity sample;
-        final Collection<? extends ExampleEntity> entities;
-
-        sample = QPersistentExampleEntity.persistentExampleEntity;
-
-        queryFactory.delete(sample).execute();
-
-        entities = queryFactory.selectFrom(sample).fetch();
-
-        Assertions.assertEquals(0, entities.size());
     }
 
 }
