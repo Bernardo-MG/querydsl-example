@@ -33,6 +33,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.junit.jupiter.EnabledIf;
 
 import com.bernardomg.example.querydsl.jpa.model.PersistentExampleEntity;
 import com.bernardomg.example.querydsl.jpa.model.QPersistentExampleEntity;
@@ -42,6 +43,8 @@ import com.querydsl.sql.SQLQueryFactory;
 
 @JpaPersistenceIntegrationTest
 @DisplayName("SQL insertion")
+@EnabledIf(expression = "#{'!${persistence.database}'.equals('mongo')}",
+        reason = "Requires relational database")
 public class ITPersistentExampleEntitySqlInsert {
 
     @Autowired

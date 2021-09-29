@@ -31,6 +31,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.jdbc.Sql;
+import org.springframework.test.context.junit.jupiter.EnabledIf;
 
 import com.bernardomg.example.querydsl.jpa.model.ExampleEntity;
 import com.bernardomg.example.querydsl.jpa.model.QPersistentExampleEntity;
@@ -39,6 +40,8 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 
 @JpaPersistenceIntegrationTest
 @DisplayName("JPA queries")
+@EnabledIf(expression = "#{'!${persistence.database}'.equals('mongo')}",
+        reason = "Requires relational database")
 public class ITPersistentExampleEntityJpaDelete {
 
     @Autowired

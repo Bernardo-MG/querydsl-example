@@ -32,7 +32,7 @@ import com.bernardomg.example.querydsl.test.config.mongo.annotation.MongoPersist
 @MongoPersistenceIntegrationTest
 @DisplayName("Mongo queries")
 @EnabledIf(expression = "#{'${persistence.database}'.equals('mongo')}",
-        reason = "Requires MongoDB", loadContext = true)
+        reason = "Requires MongoDB")
 public class ITPersistentExampleEntityMongoRead {
 
     /**
