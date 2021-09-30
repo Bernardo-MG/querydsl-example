@@ -37,6 +37,18 @@ jobs:
           --health-interval=10s
           --health-timeout=5s
           --health-retries=5
+      mongo:
+        image: mongo:5.0.3
+        env:
+          POSTGRES_DB: testdb
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 27017:27017
+        options: >-
+          --health-cmd="/etc/init.d/mongodb status"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
     steps:
     - name: Check-out
       uses: actions/checkout@v2
