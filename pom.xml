@@ -125,15 +125,6 @@
             <!-- Spring context -->
             <spring.profile.database>hsqldb</spring.profile.database>
          </properties>
-         <dependencies>
-            <dependency>
-               <!-- HSQLDB driver -->
-               <groupId>org.hsqldb</groupId>
-               <artifactId>hsqldb</artifactId>
-               <version>${hsqldb.version}</version>
-               <scope>test</scope>
-            </dependency>
-         </dependencies>
       </profile>
       <profile>
          <!-- MySQL database profile -->
@@ -147,15 +138,6 @@
             <!-- Spring context -->
             <spring.profile.database>mysql</spring.profile.database>
          </properties>
-         <dependencies>
-            <dependency>
-               <!-- MySQL connector -->
-               <groupId>mysql</groupId>
-               <artifactId>mysql-connector-java</artifactId>
-               <version>${mysql.version}</version>
-               <scope>test</scope>
-            </dependency>
-         </dependencies>
       </profile>
       <profile>
          <!-- Postgres database profile -->
@@ -169,15 +151,6 @@
             <!-- Spring context -->
             <spring.profile.database>postgres</spring.profile.database>
          </properties>
-         <dependencies>
-            <dependency>
-               <!-- Postgres connector -->
-               <groupId>org.postgresql</groupId>
-               <artifactId>postgresql</artifactId>
-               <version>${postgresql.version}</version>
-               <scope>test</scope>
-            </dependency>
-         </dependencies>
       </profile>
       <profile>
          <!-- Mongo database profile -->
@@ -190,8 +163,6 @@
             <!-- Spring context -->
             <spring.profile.database>mongo</spring.profile.database>
          </properties>
-         <dependencies>
-         </dependencies>
       </profile>
       <!-- ============================================== -->
       <!-- ============= DEPLOYMENT PROFILES ============ -->
