@@ -5,6 +5,8 @@
       <author email="programming@bernardomg.com">Bernardo Martínez Garrido</author>
    </properties>
    <body>
+      <release version="1.2.0" date="2021-09-30" description="">
+      </release>
       <release version="1.1.0" date="2021-09-30" description="Added Mongo">
          <action dev="bmg" type="add">
             Added Mongodb query tests.
