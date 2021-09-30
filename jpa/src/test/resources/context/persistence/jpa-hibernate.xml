@@ -24,13 +24,13 @@
 
    <!-- JPA Adapter -->
    <bean id="jpaAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
-      <property name="database" value="${persistence.database}" />
+      <property name="database" value="${persistence.database:H2}" />
       <property name="showSql" value="${jpa.showSql}" />
    </bean>
 
    <!-- JPA Properties -->
    <util:map id="jpaProperties">
-      <entry key="hibernate.dialect" value="${hibernate.dialect}" />
+      <entry key="hibernate.dialect" value="${hibernate.dialect:org.hibernate.dialect.H2Dialect}" />
       <entry key="hibernate.hbm2ddl.auto" value="${hibernate.hbm2ddl.auto}" />
       <entry key="hibernate.ejb.naming_strategy" value="${hibernate.namingStrategy}" />
       <entry key="hibernate.show_sql" value="${jpa.showSql}" />

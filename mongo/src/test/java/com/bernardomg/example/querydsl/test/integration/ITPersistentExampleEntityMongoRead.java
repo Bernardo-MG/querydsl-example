@@ -41,7 +41,7 @@ import com.google.common.collect.Iterables;
 @MongoPersistenceIntegrationTest
 @DisplayName("Mongo queries")
 @EnabledIf(expression = "#{'${persistence.database}'.equals('mongo')}",
-        reason = "Requires MongoDB", loadContext = true)
+        reason = "Requires MongoDB")
 public class ITPersistentExampleEntityMongoRead {
 
     @Autowired

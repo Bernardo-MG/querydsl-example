@@ -9,7 +9,7 @@ jobs:
     strategy:
       matrix:
         jdk: [ 11, 16 ]
-        db: [ h2, hsqldb, mysql, postgres ]
+        db: [ h2, hsqldb, mysql, postgres, "mongo,default" ]
 
 
     services:
