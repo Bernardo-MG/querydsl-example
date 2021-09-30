@@ -32,7 +32,7 @@ import java.lang.annotation.Target;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 import com.bernardomg.example.querydsl.test.config.mongo.extension.MongoCleanupExtension;
-import com.bernardomg.example.querydsl.test.config.mongo.extension.MongoInitializationExtension;
+import com.bernardomg.example.querydsl.test.config.mongo.extension.MongoInitializationMultipleDocExtension;
 
 /**
  * Marca un método para inicializar la base de datos Mongo. Tras su ejecución la
@@ -43,8 +43,8 @@ import com.bernardomg.example.querydsl.test.config.mongo.extension.MongoInitiali
  */
 @Retention(RetentionPolicy.RUNTIME)
 @ExtendWith(MongoCleanupExtension.class)
-@ExtendWith(MongoInitializationExtension.class)
+@ExtendWith(MongoInitializationMultipleDocExtension.class)
 @Target({ ElementType.TYPE, ElementType.METHOD })
-public @interface MongoDataEnvironment {
+public @interface MongoDataMultipleDocument {
 
 }

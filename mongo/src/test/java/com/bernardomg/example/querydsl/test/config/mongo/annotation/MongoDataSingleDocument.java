@@ -22,49 +22,29 @@
  * SOFTWARE.
  */
 
-package com.bernardomg.example.querydsl.mongo.model;
+package com.bernardomg.example.querydsl.test.config.mongo.annotation;
 
-import java.io.Serializable;
-import java.math.BigInteger;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+import org.junit.jupiter.api.extension.ExtendWith;
+
+import com.bernardomg.example.querydsl.test.config.mongo.extension.MongoCleanupExtension;
+import com.bernardomg.example.querydsl.test.config.mongo.extension.MongoInitializationSingleDocExtension;
 
 /**
- * A simple entity to be used as an example.
+ * Marca un método para inicializar la base de datos Mongo. Tras su ejecución la
+ * base de datos será limpiada.
+ * 
+ * @author bmg
  *
- * @author Bernardo Mart&iacute;nez Garrido
  */
-public interface ExampleEntity extends Serializable {
-
-    /**
-     * Returns the identifier assigned to this entity.
-     * <p>
-     * If no identifier has been assigned yet, then the value is expected to be
-     * {@code null} or lower than zero.
-     *
-     * @return the entity's identifier
-     */
-    public BigInteger getId();
-
-    /**
-     * Returns the name of the entity.
-     *
-     * @return the entity's name
-     */
-    public String getName();
-
-    /**
-     * Sets the identifier assigned to this entity.
-     *
-     * @param identifier
-     *            the identifier for the entity
-     */
-    public void setId(final BigInteger identifier);
-
-    /**
-     * Changes the name of the entity.
-     *
-     * @param name
-     *            the name to set on the entity
-     */
-    public void setName(final String name);
+@Retention(RetentionPolicy.RUNTIME)
+@ExtendWith(MongoCleanupExtension.class)
+@ExtendWith(MongoInitializationSingleDocExtension.class)
+@Target({ ElementType.TYPE, ElementType.METHOD })
+public @interface MongoDataSingleDocument {
 
 }

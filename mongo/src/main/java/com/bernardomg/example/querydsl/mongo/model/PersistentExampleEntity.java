@@ -26,6 +26,7 @@ package com.bernardomg.example.querydsl.mongo.model;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import java.math.BigInteger;
 import java.util.Objects;
 
 import org.springframework.data.annotation.Id;
@@ -55,7 +56,7 @@ public class PersistentExampleEntity implements ExampleEntity {
      * Entity's ID.
      */
     @Id
-    private Integer           id               = -1;
+    private BigInteger        id               = BigInteger.valueOf(-1l);
 
     /**
      * Name of the entity.
@@ -100,7 +101,7 @@ public class PersistentExampleEntity implements ExampleEntity {
      * @return the entity's identifier
      */
     @Override
-    public Integer getId() {
+    public BigInteger getId() {
         return id;
     }
 
@@ -115,7 +116,7 @@ public class PersistentExampleEntity implements ExampleEntity {
     }
 
     @Override
-    public void setId(final Integer value) {
+    public void setId(final BigInteger value) {
         id = checkNotNull(value, "Received a null pointer as identifier");
     }
 

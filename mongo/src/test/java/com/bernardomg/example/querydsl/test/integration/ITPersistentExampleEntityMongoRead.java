@@ -30,9 +30,13 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.junit.jupiter.EnabledIf;
 
+import com.bernardomg.example.querydsl.mongo.model.PersistentExampleEntity;
+import com.bernardomg.example.querydsl.mongo.model.QPersistentExampleEntity;
 import com.bernardomg.example.querydsl.mongo.repository.ExampleEntityRepository;
-import com.bernardomg.example.querydsl.test.config.mongo.annotation.MongoDataEnvironment;
+import com.bernardomg.example.querydsl.test.config.mongo.annotation.MongoDataMultipleDocument;
+import com.bernardomg.example.querydsl.test.config.mongo.annotation.MongoDataSingleDocument;
 import com.bernardomg.example.querydsl.test.config.mongo.annotation.MongoPersistenceIntegrationTest;
+import com.google.common.collect.Iterables;
 
 @MongoPersistenceIntegrationTest
 @DisplayName("Mongo queries")
@@ -51,9 +55,22 @@ public class ITPersistentExampleEntityMongoRead {
     }
 
     @Test
-    @MongoDataEnvironment
-    public void placeholder() {
+    @MongoDataSingleDocument
+    public void testQuery() {
         Assertions.assertEquals(1, repository.count());
+    }
+
+    @Test
+    @MongoDataMultipleDocument
+    public void testQuery_Filter() {
+        final QPersistentExampleEntity sample;
+        final Iterable<PersistentExampleEntity> read;
+
+        sample = QPersistentExampleEntity.persistentExampleEntity;
+
+        read = repository.findAll(sample.name.eq("entity_02"));
+
+        Assertions.assertEquals(1, Iterables.size(read));
     }
 
 }
