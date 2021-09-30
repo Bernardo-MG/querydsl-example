@@ -68,7 +68,7 @@ public final class MongoInitializationExtension implements BeforeEachCallback {
                 .getBean(MongoOperations.class);
 
         // Se procesan los datos de test
-        jsonResource = new ClassPathResource("json/centro_full.json");
+        jsonResource = new ClassPathResource("json/entities_single.json");
         json = StreamUtils.copyToString(jsonResource.getInputStream(),
                 Charset.defaultCharset());
         data = BasicDBObject.parse(json);
@@ -77,7 +77,7 @@ public final class MongoInitializationExtension implements BeforeEachCallback {
         LOGGER.trace("Saving: {}", data);
 
         // Guarda los datos de test
-        operations.save(data, "centros");
+        operations.save(data, "ExampleEntity");
     }
 
 }

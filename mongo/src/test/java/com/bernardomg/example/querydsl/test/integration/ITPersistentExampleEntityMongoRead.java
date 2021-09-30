@@ -24,12 +24,14 @@
 
 package com.bernardomg.example.querydsl.test.integration;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.junit.jupiter.EnabledIf;
 
 import com.bernardomg.example.querydsl.mongo.repository.ExampleEntityRepository;
+import com.bernardomg.example.querydsl.test.config.mongo.annotation.MongoDataEnvironment;
 import com.bernardomg.example.querydsl.test.config.mongo.annotation.MongoPersistenceIntegrationTest;
 
 @MongoPersistenceIntegrationTest
@@ -49,8 +51,9 @@ public class ITPersistentExampleEntityMongoRead {
     }
 
     @Test
+    @MongoDataEnvironment
     public void placeholder() {
-
+        Assertions.assertEquals(1, repository.count());
     }
 
 }

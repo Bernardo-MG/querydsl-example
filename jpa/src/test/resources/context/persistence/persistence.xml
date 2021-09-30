@@ -37,8 +37,4 @@
    <!-- Activates transactionality -->
    <tx:annotation-driven transaction-manager="transactionManager" />
 
-   <!-- ============================== PERSISTENCE VERSIONING =============================== -->
-
-   <import resource="classpath:context/persistence/liquibase.xml" />
-
 </beans>
