@@ -40,7 +40,7 @@ import com.google.common.collect.Iterables;
 
 @MongoPersistenceIntegrationTest
 @DisplayName("Mongo queries")
-@EnabledIf(expression = "#{'${persistence.database}'.equals('mongo')}",
+@EnabledIf(expression = "#{'${test.environment}'.equals('mongo')}",
         reason = "Requires MongoDB")
 public class ITPersistentExampleEntityMongoRead {
 

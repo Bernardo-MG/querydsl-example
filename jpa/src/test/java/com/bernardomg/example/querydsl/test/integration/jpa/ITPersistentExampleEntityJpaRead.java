@@ -41,7 +41,7 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 
 @JpaPersistenceIntegrationTest
 @DisplayName("JPA queries")
-@EnabledIf(expression = "#{!'${persistence.database}'.equals('mongo')}",
+@EnabledIf(expression = "#{!'${test.environment}'.equals('mongo')}",
         reason = "Requires relational database")
 public class ITPersistentExampleEntityJpaRead {
 

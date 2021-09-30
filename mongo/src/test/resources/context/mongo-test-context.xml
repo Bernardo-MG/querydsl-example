@@ -15,7 +15,8 @@
    <!-- Properties -->
    <context:property-placeholder
       location="classpath:config/persistence/database/db-mongo.properties, 
-                  classpath:config/persistence/persistence-access.properties" />
+                  classpath:config/persistence/persistence-access.properties,
+                  classpath:config/persistence/environment.properties" />
 
    <!-- Contexts -->
    <import resource="classpath:context/persistence/mongo.xml" />

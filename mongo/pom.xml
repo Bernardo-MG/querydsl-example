@@ -25,6 +25,40 @@
    <description>An example showing how to use Querydsl</description>
 
    <!-- ********************************************** -->
+   <!-- ****************** PROFILES ****************** -->
+   <!-- ********************************************** -->
+
+   <profiles>
+      <!-- ============================================== -->
+      <!-- ============= DATABASE PROFILES ============== -->
+      <!-- ============================================== -->
+      <profile>
+         <!-- Default database profile -->
+         <!-- Required when the tests are disabled -->
+         <id>default</id>
+         <properties>
+            <!-- Access data -->
+            <database.uri>mongodb://username:password@localhost:27017/testdb</database.uri>
+            <database.name>testdb</database.name>
+            <!-- Spring context -->
+            <spring.profile.database>mongo</spring.profile.database>
+         </properties>
+      </profile>
+      <profile>
+         <!-- Mongo database profile -->
+         <!-- Prepares the project to make use of a Mongo in-memory database -->
+         <id>mongo</id>
+         <properties>
+            <!-- Access data -->
+            <database.uri>mongodb://username:password@localhost:27017/testdb</database.uri>
+            <database.name>testdb</database.name>
+            <!-- Spring context -->
+            <spring.profile.database>mongo</spring.profile.database>
+         </properties>
+      </profile>
+   </profiles>
+
+   <!-- ********************************************** -->
    <!-- **************** PROPERTIES ****************** -->
    <!-- ********************************************** -->
 
