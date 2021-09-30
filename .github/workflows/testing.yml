@@ -9,32 +9,46 @@ jobs:
     strategy:
       matrix:
         jdk: [ 11, 16 ]
-        db: [ h2, hsqldb, mysql, postgres ]
-        provider: [ hibernate ]
+        db: [ h2, hsqldb, mysql, postgres, mongo ]
 
 
     services:
       mysql:
-        image: mysql:5.7
+        image: mysql:8.0
         env:
-            MYSQL_DATABASE: jpa_test
+            MYSQL_DATABASE: testdb
             MYSQL_ROOT_PASSWORD: root
         ports:
-          # Maps port on service container to the host
             - 3306:3306
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
-      postgres:
-        image: postgres
-        env:
-          POSTGRES_PASSWORD: postgres
         options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
+          --health-cmd="mysqladmin ping"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
+      postgres:
+        image: postgres:9.6-bullseye
+        env:
+          POSTGRES_DB: testdb
+          POSTGRES_PASSWORD: postgres
         ports:
-          # Maps port on service container to the host
           - 5432:5432
+        options: >-
+          --health-cmd=pg_isready
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+      mongo:
+        image: mongo:5.0.3
+        env:
+          POSTGRES_DB: testdb
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 27017:27017
+        options: >-
+          --health-cmd=mongo
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
     steps:
     - name: Check-out
       uses: actions/checkout@v2
@@ -49,4 +63,4 @@ jobs:
         path: ~/.m2/repository
         key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
     - name: Run all tests
-      run: mvn clean verify -P ${{ matrix.db }},${{ matrix.provider }}
+      run: mvn clean verify -P default,${{ matrix.db }} -Dtest.environment=${{ matrix.db }}
