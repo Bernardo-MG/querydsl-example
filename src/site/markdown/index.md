@@ -1,6 +1,6 @@
 # Querydsl Example
 
-An example showing how to set up Querydsl.
+Using the Querydsl DSL to handle queries.
 
 ## Features
 
