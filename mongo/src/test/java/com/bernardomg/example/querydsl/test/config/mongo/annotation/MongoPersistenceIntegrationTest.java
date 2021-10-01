@@ -31,6 +31,13 @@ import java.lang.annotation.Target;
 
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
+/**
+ * Integration test annotation. Contains the common configuration for the
+ * integration tests.
+ * 
+ * @author Bernardo Mart&iacute;nez Garrido
+ *
+ */
 @SpringJUnitConfig(locations = { "classpath:context/mongo-test-context.xml" })
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)

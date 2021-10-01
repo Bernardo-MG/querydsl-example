@@ -32,6 +32,13 @@ import java.lang.annotation.Target;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * Integration test annotation. Contains the common configuration for the
+ * integration tests.
+ * 
+ * @author Bernardo Mart&iacute;nez Garrido
+ *
+ */
 @SpringJUnitConfig(locations = { "classpath:context/jpa-test-context.xml" })
 @Transactional
 @Retention(RetentionPolicy.RUNTIME)

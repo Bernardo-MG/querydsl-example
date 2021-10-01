@@ -35,10 +35,9 @@ import com.bernardomg.example.querydsl.test.config.mongo.extension.MongoCleanupE
 import com.bernardomg.example.querydsl.test.config.mongo.extension.MongoInitializationMultipleDocExtension;
 
 /**
- * Marca un método para inicializar la base de datos Mongo. Tras su ejecución la
- * base de datos será limpiada.
+ * Multiple document initialization annotation.
  * 
- * @author bmg
+ * @author Bernardo Mart&iacute;nez Garrido
  *
  */
 @Retention(RetentionPolicy.RUNTIME)
