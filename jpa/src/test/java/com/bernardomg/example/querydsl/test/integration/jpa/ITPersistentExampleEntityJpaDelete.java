@@ -36,7 +36,7 @@ import org.springframework.test.context.junit.jupiter.EnabledIf;
 import com.bernardomg.example.querydsl.jpa.model.ExampleEntity;
 import com.bernardomg.example.querydsl.jpa.model.QPersistentExampleEntity;
 import com.bernardomg.example.querydsl.test.config.jpa.annotation.JpaPersistenceIntegrationTest;
-import com.querydsl.jpa.impl.JPAQueryFactory;
+import com.querydsl.jpa.JPQLQueryFactory;
 
 @JpaPersistenceIntegrationTest
 @DisplayName("JPA queries")
@@ -45,7 +45,7 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 public class ITPersistentExampleEntityJpaDelete {
 
     @Autowired
-    private JPAQueryFactory queryFactory;
+    private JPQLQueryFactory queryFactory;
 
     /**
      * Default constructor.
