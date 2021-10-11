@@ -174,7 +174,6 @@
       <querydsl.version>5.0.0</querydsl.version>
       <slf4j.version>2.0.0-alpha5</slf4j.version>
       <snakeyaml.version>1.29</snakeyaml.version>
-      <spring.data.train.version>2021.0.4</spring.data.train.version>
       <spring.version>5.3.10</spring.version>
       <!-- ============================================== -->
       <!-- ============== PLUGINS VERSIONS ============== -->
