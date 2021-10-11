@@ -156,7 +156,6 @@
       <!-- ============================================== -->
       <!-- =========== DEPENDENCIES VERSIONS ============ -->
       <!-- ============================================== -->
-      <guava.version>31.0-jre</guava.version>
       <h2.version>1.4.200</h2.version>
       <hibernate.version>5.5.7.Final</hibernate.version>
       <hikari.version>3.4.5</hikari.version>
@@ -210,15 +209,6 @@
    </dependencyManagement>
 
    <dependencies>
-      <!-- ============================================== -->
-      <!-- ==================== GUAVA =================== -->
-      <!-- ============================================== -->
-      <dependency>
-         <!-- Guava -->
-         <groupId>com.google.guava</groupId>
-         <artifactId>guava</artifactId>
-         <version>${guava.version}</version>
-      </dependency>
       <!-- ============================================== -->
       <!-- ==================== JAVAX =================== -->
       <!-- ============================================== -->

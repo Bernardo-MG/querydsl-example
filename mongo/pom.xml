@@ -70,7 +70,6 @@
       <!-- ============================================== -->
       <!-- =========== DEPENDENCIES VERSIONS ============ -->
       <!-- ============================================== -->
-      <guava.version>31.0-jre</guava.version>
       <junit.jupiter.version>5.8.0</junit.jupiter.version>
       <log4j.version>2.14.1</log4j.version>
       <mongo.embedded.version>3.0.0</mongo.embedded.version>
@@ -115,15 +114,6 @@
    </dependencyManagement>
 
    <dependencies>
-      <!-- ============================================== -->
-      <!-- ==================== GUAVA =================== -->
-      <!-- ============================================== -->
-      <dependency>
-         <!-- Guava -->
-         <groupId>com.google.guava</groupId>
-         <artifactId>guava</artifactId>
-         <version>${guava.version}</version>
-      </dependency>
       <!-- ============================================== -->
       <!-- =================== SPRING =================== -->
       <!-- ============================================== -->

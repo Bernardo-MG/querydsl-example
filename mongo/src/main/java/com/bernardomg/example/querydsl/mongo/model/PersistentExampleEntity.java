@@ -24,17 +24,14 @@
 
 package com.bernardomg.example.querydsl.mongo.model;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
 import java.math.BigInteger;
 import java.util.Objects;
+import java.util.StringJoiner;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
-
-import com.google.common.base.MoreObjects;
 
 /**
  * Persistent entity for the example application.
@@ -117,18 +114,19 @@ public class PersistentExampleEntity implements ExampleEntity {
 
     @Override
     public void setId(final BigInteger value) {
-        id = checkNotNull(value, "Received a null pointer as identifier");
+        id = Objects.requireNonNull(value,
+                "Received a null pointer as identifier");
     }
 
     @Override
     public void setName(final String value) {
-        name = checkNotNull(value, "Received a null pointer as name");
+        name = Objects.requireNonNull(value, "Received a null pointer as name");
     }
 
     @Override
     public final String toString() {
-        return MoreObjects.toStringHelper(this).add("id", id).add("name", name)
-                .toString();
+        return new StringJoiner(" | ", this.getClass().getSimpleName() + "[ ",
+                " ]").add("id=" + id).add("name=" + name).toString();
     }
 
 }

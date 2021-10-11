@@ -24,6 +24,8 @@
 
 package com.bernardomg.example.querydsl.test.integration;
 
+import java.util.stream.StreamSupport;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -36,7 +38,6 @@ import com.bernardomg.example.querydsl.mongo.repository.ExampleEntityRepository;
 import com.bernardomg.example.querydsl.test.config.mongo.annotation.MongoDataMultipleDocument;
 import com.bernardomg.example.querydsl.test.config.mongo.annotation.MongoDataSingleDocument;
 import com.bernardomg.example.querydsl.test.config.mongo.annotation.MongoPersistenceIntegrationTest;
-import com.google.common.collect.Iterables;
 
 @MongoPersistenceIntegrationTest
 @DisplayName("Mongo queries")
@@ -70,7 +71,8 @@ public class ITPersistentExampleEntityMongoRead {
 
         read = repository.findAll(sample.name.eq("entity_02"));
 
-        Assertions.assertEquals(1, Iterables.size(read));
+        Assertions.assertEquals(1,
+                StreamSupport.stream(read.spliterator(), false).count());
     }
 
 }
