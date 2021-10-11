@@ -174,12 +174,6 @@
          <scope>test</scope>
       </dependency>
       <dependency>
-         <!-- JUnit Jupiter Params -->
-         <groupId>org.junit.jupiter</groupId>
-         <artifactId>junit-jupiter-params</artifactId>
-         <scope>test</scope>
-      </dependency>
-      <dependency>
          <!-- JUnit Jupiter Platform -->
          <groupId>org.junit.platform</groupId>
          <artifactId>junit-platform-runner</artifactId>
