@@ -21,6 +21,7 @@
    <modules>
       <module>jpa</module>
       <module>mongo</module>
+      <module>sql</module>
    </modules>
 
    <!-- ********************************************** -->
@@ -163,6 +164,7 @@
       <!-- ============================================== -->
       <plugin.enforcer.version>1.4.1</plugin.enforcer.version>
       <plugin.processor.version>4.5</plugin.processor.version>
+      <plugin.querydsl.version>5.0.0</plugin.querydsl.version>
       <!-- ============================================== -->
       <!-- ================= MAVEN SITE ================= -->
       <!-- ============================================== -->
@@ -175,6 +177,16 @@
 
    <build>
       <defaultGoal>clean package</defaultGoal>
+      <pluginManagement>
+         <plugins>
+            <plugin>
+               <!-- Querydsl -->
+               <groupId>com.querydsl</groupId>
+               <artifactId>querydsl-maven-plugin</artifactId>
+               <version>${plugin.querydsl.version}</version>
+            </plugin>
+         </plugins>
+      </pluginManagement>
       <plugins>
          <plugin>
             <!-- Changes -->

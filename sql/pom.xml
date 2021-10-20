@@ -18,10 +18,10 @@
    <!-- **************** PROJECT INFO **************** -->
    <!-- ********************************************** -->
 
-   <artifactId>jpa</artifactId>
+   <artifactId>sql</artifactId>
    <packaging>jar</packaging>
 
-   <name>Querydsl Example - JPA</name>
+   <name>Querydsl Example - SQL</name>
    <description>An example showing how to use Querydsl</description>
 
    <!-- ********************************************** -->
@@ -152,16 +152,19 @@
       <!-- ============================================== -->
       <!-- =============== MANIFEST DATA ================ -->
       <!-- ============================================== -->
-      <manifest.name>com/bernardomg/example/querydsl/jpa</manifest.name>
+      <manifest.name>com/bernardomg/example/querydsl/sql</manifest.name>
+      <!-- ============================================== -->
+      <!-- ============== CODE GENERATION =============== -->
+      <!-- ============================================== -->
+      <codegen.skip>true</codegen.skip>
+      <codegen.url><![CDATA[jdbc:mysql://localhost:3306/testdb?user=test&password=test&nullNamePatternMatchesAll=true]]></codegen.url>
       <!-- ============================================== -->
       <!-- =========== DEPENDENCIES VERSIONS ============ -->
       <!-- ============================================== -->
       <h2.version>1.4.200</h2.version>
-      <hibernate.version>5.5.7.Final</hibernate.version>
       <hikari.version>3.4.5</hikari.version>
       <hsqldb.version>2.6.0</hsqldb.version>
       <javaee.api.version>2.2</javaee.api.version>
-      <javax.annotation.version>1.3.2</javax.annotation.version>
       <jaxb.version>2.3.1</jaxb.version>
       <junit.jupiter.version>5.8.0</junit.jupiter.version>
       <liquibase.version>4.4.3</liquibase.version>
@@ -210,21 +213,18 @@
 
    <dependencies>
       <!-- ============================================== -->
-      <!-- ==================== JAVAX =================== -->
-      <!-- ============================================== -->
-      <dependency>
-         <!-- JavaX Annotation -->
-         <groupId>javax.annotation</groupId>
-         <artifactId>javax.annotation-api</artifactId>
-         <version>${javax.annotation.version}</version>
-      </dependency>
-      <!-- ============================================== -->
       <!-- ================== QUERYDSL ================== -->
       <!-- ============================================== -->
       <dependency>
          <!-- Querydsl Core -->
          <groupId>com.querydsl</groupId>
          <artifactId>querydsl-core</artifactId>
+         <version>${querydsl.version}</version>
+      </dependency>
+      <dependency>
+         <!-- Querydsl SQL -->
+         <groupId>com.querydsl</groupId>
+         <artifactId>querydsl-sql</artifactId>
          <version>${querydsl.version}</version>
       </dependency>
       <!-- ============================================== -->
@@ -295,12 +295,6 @@
          <scope>test</scope>
       </dependency>
       <dependency>
-         <!-- Spring ORM -->
-         <groupId>org.springframework</groupId>
-         <artifactId>spring-orm</artifactId>
-         <scope>test</scope>
-      </dependency>
-      <dependency>
          <!-- Spring Test -->
          <groupId>org.springframework</groupId>
          <artifactId>spring-test</artifactId>
@@ -320,45 +314,6 @@
          <groupId>com.querydsl</groupId>
          <artifactId>querydsl-sql-spring</artifactId>
          <version>${querydsl.version}</version>
-         <scope>test</scope>
-      </dependency>
-      <dependency>
-         <!-- Querydsl APT -->
-         <groupId>com.querydsl</groupId>
-         <artifactId>querydsl-apt</artifactId>
-         <version>${querydsl.version}</version>
-      </dependency>
-      <dependency>
-         <!-- Querydsl JPA -->
-         <groupId>com.querydsl</groupId>
-         <artifactId>querydsl-jpa</artifactId>
-         <version>${querydsl.version}</version>
-         <scope>test</scope>
-      </dependency>
-      <!-- ********************************************** -->
-      <!-- ******************** JPA ********************* -->
-      <!-- ********************************************** -->
-      <dependency>
-         <!-- JPA API -->
-         <groupId>javax.persistence</groupId>
-         <artifactId>javax.persistence-api</artifactId>
-         <version>${javaee.api.version}</version>
-      </dependency>
-      <!-- ********************************************** -->
-      <!-- ***************** HIBERNATE ****************** -->
-      <!-- ********************************************** -->
-      <dependency>
-         <!-- Hibernate Core -->
-         <groupId>org.hibernate</groupId>
-         <artifactId>hibernate-core</artifactId>
-         <version>${hibernate.version}</version>
-         <scope>test</scope>
-      </dependency>
-      <dependency>
-         <!-- Hibernate Ehcache -->
-         <groupId>org.hibernate</groupId>
-         <artifactId>hibernate-ehcache</artifactId>
-         <version>${hibernate.version}</version>
          <scope>test</scope>
       </dependency>
       <!-- ********************************************** -->
@@ -462,47 +417,6 @@
             </dependencies>
          </plugin>
          <plugin>
-            <!-- Build helper -->
-            <!-- Adds the generated files to the Maven classpath -->
-            <groupId>org.codehaus.mojo</groupId>
-            <artifactId>build-helper-maven-plugin</artifactId>
-            <executions>
-               <execution>
-                  <id>add-source</id>
-                  <goals>
-                     <goal>add-source</goal>
-                  </goals>
-                  <configuration>
-                     <sources>
-                        <!-- JPA meta-model -->
-                        <source>${project.build.directory}/generated-sources/apt</source>
-                     </sources>
-                  </configuration>
-               </execution>
-            </executions>
-         </plugin>
-         <plugin>
-            <!-- Maven processor -->
-            <!-- Processes Java annotations -->
-            <groupId>org.bsc.maven</groupId>
-            <artifactId>maven-processor-plugin</artifactId>
-            <version>${plugin.processor.version}</version>
-            <executions>
-               <execution>
-                  <id>generate-metamodel</id>
-                  <goals>
-                     <goal>process</goal>
-                  </goals>
-                  <phase>generate-sources</phase>
-                  <configuration>
-                     <processors>
-                        <processor>com.querydsl.apt.jpa.JPAAnnotationProcessor</processor>
-                     </processors>
-                  </configuration>
-               </execution>
-            </executions>
-         </plugin>
-         <plugin>
             <!-- Resources -->
             <!-- Handles the project resources. -->
             <groupId>org.apache.maven.plugins</groupId>
@@ -516,6 +430,53 @@
                   <delimiter>@</delimiter>
                </delimiters>
             </configuration>
+         </plugin>
+         <plugin>
+            <!-- Querydsl -->
+            <groupId>com.querydsl</groupId>
+            <artifactId>querydsl-maven-plugin</artifactId>
+            <executions>
+               <execution>
+                  <id>generate-metamodel</id>
+                  <goals>
+                     <goal>export</goal>
+                  </goals>
+               </execution>
+            </executions>
+            <configuration>
+               <skip>${codegen.skip}</skip>
+               <jdbcDriver>com.mysql.cj.jdbc.Driver</jdbcDriver>
+               <jdbcUrl>${codegen.url}</jdbcUrl>
+               <packageName>es.enviraiot.dahs.domain.metamodel.v3</packageName>
+               <targetFolder>${project.build.directory}/generated-sources/metamodel</targetFolder>
+            </configuration>
+            <dependencies>
+               <dependency>
+                  <groupId>mysql</groupId>
+                  <artifactId>mysql-connector-java</artifactId>
+                  <version>${mysql.version}</version>
+               </dependency>
+            </dependencies>
+         </plugin>
+         <plugin>
+            <!-- Build helper -->
+            <!-- Adds the generated files to the Maven classpath -->
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>build-helper-maven-plugin</artifactId>
+            <executions>
+               <execution>
+                  <id>add-metamodel</id>
+                  <goals>
+                     <goal>add-source</goal>
+                  </goals>
+                  <configuration>
+                     <sources>
+                        <!-- Meta-model -->
+                        <source>${project.build.directory}/generated-sources/metamodel</source>
+                     </sources>
+                  </configuration>
+               </execution>
+            </executions>
          </plugin>
       </plugins>
    </build>
