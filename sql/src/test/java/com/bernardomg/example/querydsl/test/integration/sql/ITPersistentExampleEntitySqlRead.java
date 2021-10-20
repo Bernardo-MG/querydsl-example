@@ -24,10 +24,16 @@
 
 package com.bernardomg.example.querydsl.test.integration.sql;
 
+import java.util.Collection;
+
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit.jupiter.EnabledIf;
 
+import com.bernardomg.example.querydsl.sql.metamodel.QExampleEntities;
 import com.bernardomg.example.querydsl.test.config.jpa.annotation.JpaPersistenceIntegrationTest;
 import com.querydsl.sql.SQLQueryFactory;
 
@@ -47,63 +53,47 @@ public class ITPersistentExampleEntitySqlRead {
         super();
     }
 
-    // @Test
-    // @DisplayName("Applies filters to queries")
-    // @Sql("/sql/test_entity_multiple.sql")
-    // public final void testQuery_Filter() {
-    // final QPersistentExampleEntity sample;
-    // final Collection<? extends ExampleEntity> entities;
-    //
-    // sample = QPersistentExampleEntity.persistentExampleEntity;
-    //
-    // entities = queryFactory.selectFrom(sample)
-    // .where(sample.name.eq("entity_02")).fetch();
-    //
-    // Assertions.assertEquals(1, entities.size());
-    // Assertions.assertEquals("entity_02",
-    // entities.iterator().next().getName());
-    // }
-    //
-    // @Test
-    // @DisplayName("Returns no data when there is no data")
-    // public final void testQuery_NoData() {
-    // final QPersistentExampleEntity sample;
-    // final Collection<? extends ExampleEntity> entities;
-    //
-    // sample = QPersistentExampleEntity.persistentExampleEntity;
-    //
-    // entities = queryFactory.selectFrom(sample).fetch();
-    //
-    // Assertions.assertEquals(0, entities.size());
-    // }
-    //
-    // @Test
-    // @DisplayName("Returns entities with an empty sample")
-    // @Sql("/sql/test_entity_single.sql")
-    // public final void testQuery_NoSample() {
-    // final QPersistentExampleEntity sample;
-    // final Collection<? extends ExampleEntity> entities;
-    //
-    // sample = QPersistentExampleEntity.persistentExampleEntity;
-    //
-    // entities = queryFactory.selectFrom(sample).fetch();
-    //
-    // Assertions.assertEquals(1, entities.size());
-    // }
-    //
-    // @Test
-    // @DisplayName("Returns the entity class")
-    // @Sql("/sql/test_entity_single.sql")
-    // public final void testQuery_ReturnsEntity() {
-    // final QPersistentExampleEntity sample;
-    // final Collection<? extends ExampleEntity> entities;
-    //
-    // sample = QPersistentExampleEntity.persistentExampleEntity;
-    //
-    // entities = queryFactory.selectFrom(sample).fetch();
-    //
-    // Assertions.assertEquals(PersistentExampleEntity.class,
-    // entities.iterator().next().getClass());
-    // }
+    @Test
+    @DisplayName("Applies filters to queries")
+    @Sql("/sql/test_entity_multiple.sql")
+    public final void testQuery_Filter() {
+        final QExampleEntities sample;
+        final Collection<?> entities;
+
+        sample = QExampleEntities.exampleEntities;
+
+        entities = queryFactory.select(sample.name).from(sample)
+                .where(sample.name.eq("entity_02")).fetch();
+
+        Assertions.assertEquals(1, entities.size());
+        Assertions.assertEquals("entity_02", entities.iterator().next());
+    }
+
+    @Test
+    @DisplayName("Returns no data when there is no data")
+    public final void testQuery_NoData() {
+        final QExampleEntities sample;
+        final Collection<?> entities;
+
+        sample = QExampleEntities.exampleEntities;
+
+        entities = queryFactory.select(sample.name).from(sample).fetch();
+
+        Assertions.assertEquals(0, entities.size());
+    }
+
+    @Test
+    @DisplayName("Returns entities with an empty sample")
+    @Sql("/sql/test_entity_single.sql")
+    public final void testQuery_NoSample() {
+        final QExampleEntities sample;
+        final Collection<?> entities;
+
+        sample = QExampleEntities.exampleEntities;
+
+        entities = queryFactory.select(sample.name).from(sample).fetch();
+
+        Assertions.assertEquals(1, entities.size());
+    }
 
 }
