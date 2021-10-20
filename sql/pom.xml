@@ -166,16 +166,13 @@
       <hsqldb.version>2.6.0</hsqldb.version>
       <javaee.api.version>2.2</javaee.api.version>
       <jaxb.version>2.3.1</jaxb.version>
-      <junit.jupiter.version>5.8.0</junit.jupiter.version>
       <liquibase.version>4.4.3</liquibase.version>
       <log4j.version>2.14.1</log4j.version>
       <mongo.embedded.version>3.0.0</mongo.embedded.version>
       <mysql.version>8.0.21</mysql.version>
       <postgresql.version>42.2.24</postgresql.version>
-      <querydsl.version>5.0.0</querydsl.version>
       <slf4j.version>2.0.0-alpha5</slf4j.version>
       <snakeyaml.version>1.29</snakeyaml.version>
-      <spring.version>5.3.10</spring.version>
       <!-- ============================================== -->
       <!-- ============== PLUGINS VERSIONS ============== -->
       <!-- ============================================== -->
@@ -190,27 +187,6 @@
    <!-- *************** DEPENDENCIES ***************** -->
    <!-- ********************************************** -->
 
-   <dependencyManagement>
-      <dependencies>
-         <dependency>
-            <!-- JUnit BOM -->
-            <groupId>org.junit</groupId>
-            <artifactId>junit-bom</artifactId>
-            <version>${junit.jupiter.version}</version>
-            <type>pom</type>
-            <scope>import</scope>
-         </dependency>
-         <dependency>
-            <!-- Spring Framework BOM -->
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-framework-bom</artifactId>
-            <version>${spring.version}</version>
-            <type>pom</type>
-            <scope>import</scope>
-         </dependency>
-      </dependencies>
-   </dependencyManagement>
-
    <dependencies>
       <!-- ============================================== -->
       <!-- ================== QUERYDSL ================== -->
@@ -219,13 +195,11 @@
          <!-- Querydsl Core -->
          <groupId>com.querydsl</groupId>
          <artifactId>querydsl-core</artifactId>
-         <version>${querydsl.version}</version>
       </dependency>
       <dependency>
          <!-- Querydsl SQL -->
          <groupId>com.querydsl</groupId>
          <artifactId>querydsl-sql</artifactId>
-         <version>${querydsl.version}</version>
       </dependency>
       <!-- ============================================== -->
       <!-- ======= TEST ENVIRONMENT DEPENDENCIES ======== -->
@@ -313,7 +287,6 @@
          <!-- Querydsl Spring -->
          <groupId>com.querydsl</groupId>
          <artifactId>querydsl-sql-spring</artifactId>
-         <version>${querydsl.version}</version>
          <scope>test</scope>
       </dependency>
       <!-- ********************************************** -->

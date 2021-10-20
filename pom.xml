@@ -160,6 +160,12 @@
       <!-- ============================================== -->
       <manifest.name>com/bernardomg/example/querydsl</manifest.name>
       <!-- ============================================== -->
+      <!-- =========== DEPENDENCIES VERSIONS ============ -->
+      <!-- ============================================== -->
+      <junit.jupiter.version>5.8.0</junit.jupiter.version>
+      <querydsl.version>5.0.0</querydsl.version>
+      <spring.version>5.3.10</spring.version>
+      <!-- ============================================== -->
       <!-- ============== PLUGINS VERSIONS ============== -->
       <!-- ============================================== -->
       <plugin.enforcer.version>1.4.1</plugin.enforcer.version>
@@ -170,6 +176,39 @@
       <!-- ============================================== -->
       <site.skin.version>2.2.4</site.skin.version>
    </properties>
+
+   <!-- ********************************************** -->
+   <!-- *************** DEPENDENCIES ***************** -->
+   <!-- ********************************************** -->
+
+   <dependencyManagement>
+      <dependencies>
+         <dependency>
+            <!-- JUnit BOM -->
+            <groupId>org.junit</groupId>
+            <artifactId>junit-bom</artifactId>
+            <version>${junit.jupiter.version}</version>
+            <type>pom</type>
+            <scope>import</scope>
+         </dependency>
+         <dependency>
+            <!-- Spring Framework BOM -->
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-framework-bom</artifactId>
+            <version>${spring.version}</version>
+            <type>pom</type>
+            <scope>import</scope>
+         </dependency>
+         <dependency>
+            <!-- Querydsl BOM -->
+            <groupId>com.querydsl</groupId>
+            <artifactId>querydsl-bom</artifactId>
+            <version>${querydsl.version}</version>
+            <type>pom</type>
+            <scope>import</scope>
+         </dependency>
+      </dependencies>
+   </dependencyManagement>
 
    <!-- ********************************************** -->
    <!-- ******************* BUILD ******************** -->
