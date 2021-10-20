@@ -22,14 +22,6 @@
          <AppenderRef ref="console" />
       </Logger>
 
-      <Logger name="org.hibernate.SQL" level="off" additivity="false">
-         <AppenderRef ref="console" />
-      </Logger>
-
-      <Logger name="org.hibernate.type" level="off" additivity="false">
-         <AppenderRef ref="console" />
-      </Logger>
-
       <Root level="error">
          <AppenderRef ref="console" />
       </Root>

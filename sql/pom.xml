@@ -280,6 +280,12 @@
          <artifactId>spring-tx</artifactId>
          <scope>test</scope>
       </dependency>
+      <dependency>
+         <!-- Spring JDBC -->
+         <groupId>org.springframework</groupId>
+         <artifactId>spring-jdbc</artifactId>
+         <scope>test</scope>
+      </dependency>
       <!-- ********************************************** -->
       <!-- ****************** QUERYDSL ****************** -->
       <!-- ********************************************** -->
