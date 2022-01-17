@@ -25,6 +25,7 @@
 package com.bernardomg.example.querydsl.test.integration.sql;
 
 import java.lang.reflect.AnnotatedElement;
+import java.util.List;
 
 import javax.persistence.Table;
 
@@ -32,19 +33,21 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit.jupiter.EnabledIf;
 
 import com.bernardomg.example.querydsl.jpa.model.PersistentExampleEntity;
 import com.bernardomg.example.querydsl.jpa.model.QPersistentExampleEntity;
 import com.bernardomg.example.querydsl.test.config.jpa.annotation.JpaPersistenceIntegrationTest;
+import com.querydsl.core.Tuple;
 import com.querydsl.sql.RelationalPathBase;
 import com.querydsl.sql.SQLQueryFactory;
 
 @JpaPersistenceIntegrationTest
-@DisplayName("SQL insertion")
+@DisplayName("SQL queries")
 @EnabledIf(expression = "#{!'${test.environment}'.equals('mongo')}",
         reason = "Requires relational database")
-public class ITPersistentExampleEntitySqlInsert {
+public class ITPersistentExampleEntitySqlSelect {
 
     @Autowired
     private SQLQueryFactory queryFactory;
@@ -52,18 +55,19 @@ public class ITPersistentExampleEntitySqlInsert {
     /**
      * Default constructor.
      */
-    public ITPersistentExampleEntitySqlInsert() {
+    public ITPersistentExampleEntitySqlSelect() {
         super();
     }
 
     @Test
-    @DisplayName("Creates data")
+    @DisplayName("Returns data")
+    @Sql("/sql/test_entity_single.sql")
     public final void testCreate() {
         final QPersistentExampleEntity sample;
         final AnnotatedElement annotatedElement;
         final Table table;
         final RelationalPathBase<PersistentExampleEntity> path;
-        final Long created;
+        final List<Tuple> read;
 
         sample = QPersistentExampleEntity.persistentExampleEntity;
 
@@ -72,12 +76,11 @@ public class ITPersistentExampleEntitySqlInsert {
         path = new RelationalPathBase<>(sample.getType(), sample.getMetadata(),
             table.schema(), table.name());
 
-        created = queryFactory.insert(path)
-            .columns(sample.id, sample.name)
-            .values(3, "name")
-            .execute();
+        read = queryFactory.select(sample.id, sample.name)
+            .from(path)
+            .fetch();
 
-        Assertions.assertEquals(1, created);
+        Assertions.assertEquals(1, read.size());
     }
 
 }
