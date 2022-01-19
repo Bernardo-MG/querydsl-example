@@ -118,14 +118,8 @@
             </site>
          </distributionManagement>
          <properties>
-            <!-- Access data -->
-            <database.url>jdbc:h2:mem:jpa_test</database.url>
-            <database.username>sa</database.username>
-            <database.password></database.password>
-            <!-- Provider -->
-            <jpa.provider>hibernate</jpa.provider>
-            <!-- Spring context -->
-            <spring.profile.database>h2</spring.profile.database>
+            <!-- Tests are skipped -->
+            <maven.test.skip>true</maven.test.skip>
          </properties>
       </profile>
    </profiles>
