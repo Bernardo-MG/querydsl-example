@@ -83,7 +83,7 @@ jobs:
 
   deploy_develop_docs:
     name: Deploy development docs
-    needs: tests
+    needs: integration_test
     uses: Bernardo-MG/github-workflow/.github/workflows/maven_deploy_site.yml@v1
     with:
       branch: develop
@@ -95,7 +95,7 @@ jobs:
 
   deploy_docs:
     name: Deploy docs
-    needs: tests
+    needs: integration_test
     uses: Bernardo-MG/github-workflow/.github/workflows/maven_deploy_site.yml@v1
     with:
       branch: master
